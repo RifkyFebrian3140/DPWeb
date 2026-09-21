@@ -6,7 +6,7 @@ $db = "postgres";
 $user = "postgres";
 
 // Isi dengan password database Supabase yang sebenarnya
-$pass = "PASSWORD_DATABASE_KAMU";
+$pass = "akutampan3140";
 
 try {
     $pdo = new PDO(
