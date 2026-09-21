@@ -1,15 +1,14 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+session_start();
 
 require __DIR__ . '/../includes/koneksi.php';
 
-$page_title = "Data Peminjam";
+$page_title = "Data Alat Kemah";
 include __DIR__ . '/../includes/header.php';
 
-$stmt = $pdo->query("SELECT * FROM anggota ORDER BY id DESC");
-$daftarPeminjam = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$daftarAlat = $pdo
+    ->query("SELECT * FROM alat ORDER BY id DESC")
+    ->fetchAll(PDO::FETCH_ASSOC);
 
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
@@ -17,7 +16,7 @@ unset($_SESSION['flash']);
 
 <main>
     <section>
-        <h2>Data Peminjam</h2>
+        <h2>Data Alat Kemah</h2>
 
         <?php if ($flash): ?>
             <p class="flash flash-<?= htmlspecialchars($flash['type']) ?>">
@@ -26,7 +25,7 @@ unset($_SESSION['flash']);
         <?php endif; ?>
 
         <p>
-            <a href="/anggota/tambah.php">+ Tambah Peminjam</a>
+            <a href="/alatkemah/tambah.php">+ Tambah Alat</a>
         </p>
 
         <div class="table-responsive">
@@ -34,26 +33,28 @@ unset($_SESSION['flash']);
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama</th>
-                        <th>No. Anggota</th>
-                        <th>Alamat</th>
-                        <th>No. HP</th>
+                        <th>Nama Alat</th>
+                        <th>Kategori</th>
+                        <th>Stok</th>
+                        <th>Kondisi</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    <?php if (empty($daftarPeminjam)): ?>
+                    <?php if (empty($daftarAlat)): ?>
                         <tr>
-                            <td colspan="5">Belum ada data peminjam.</td>
+                            <td colspan="5">
+                                Belum ada data alat kemah.
+                            </td>
                         </tr>
                     <?php else: ?>
-                        <?php foreach ($daftarPeminjam as $i => $peminjam): ?>
+                        <?php foreach ($daftarAlat as $i => $alat): ?>
                             <tr>
                                 <td><?= $i + 1 ?></td>
-                                <td><?= htmlspecialchars($peminjam['nama']) ?></td>
-                                <td><?= htmlspecialchars($peminjam['no_anggota']) ?></td>
-                                <td><?= htmlspecialchars($peminjam['alamat'] ?? '-') ?></td>
-                                <td><?= htmlspecialchars($peminjam['no_hp'] ?? '-') ?></td>
+                                <td><?= htmlspecialchars($alat['nama_alat']) ?></td>
+                                <td><?= htmlspecialchars($alat['kategori'] ?? '-') ?></td>
+                                <td><?= htmlspecialchars((string) $alat['stok']) ?></td>
+                                <td><?= htmlspecialchars($alat['kondisi']) ?></td>
                             </tr>
                         <?php endforeach; ?>
                     <?php endif; ?>
