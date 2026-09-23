@@ -13,7 +13,6 @@ try {
     );
 
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Koneksi Supabase berhasil!";
 } catch (PDOException $e) {
     die("Koneksi gagal: " . $e->getMessage());
 }
