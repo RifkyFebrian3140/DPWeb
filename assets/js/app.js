@@ -29,3 +29,23 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    document.querySelectorAll('.form-hapus').forEach(function (form) {
+
+        form.addEventListener('submit', function (event) {
+
+            const yakin = confirm(
+                'Apakah kamu yakin ingin menghapus data ini?'
+            );
+
+            if (!yakin) {
+                event.preventDefault();
+            }
+
+        });
+
+    });
+
+});
