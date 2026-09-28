@@ -1,7 +1,6 @@
 <?php
 
-session_start();
-
+require __DIR__ . '/../includes/auth.php';
 require __DIR__ . '/../includes/koneksi.php';
 
 $id = (int) ($_POST['id'] ?? 0);

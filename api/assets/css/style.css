@@ -1,0 +1,283 @@
+
+:root {
+    --hijau: #354b2b;
+    --hijau-muda: #61794b;
+    --hijau-pucat: #e8eddf;
+    --cokelat: #795238;
+    --cokelat-gelap: #4b3324;
+    --krem: #f7f3e8;
+    --putih: #fffdf8;
+    --teks: #332c23;
+    --border: #d8cbb5;
+    --merah: #a94438;
+}
+
+/* Reset */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--krem);
+    color: var(--teks);
+    line-height: 1.6;
+}
+
+/* Header */
+
+header {
+    background-color: var(--hijau);
+    color: var(--putih);
+    padding: 22px 7%;
+    border-bottom: 5px solid var(--cokelat);
+}
+
+header h1 {
+    margin: 0 0 15px;
+    font-size: 28px;
+    letter-spacing: 0.5px;
+}
+
+/* Navigasi */
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+nav a {
+    color: var(--putih);
+    text-decoration: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+nav a:hover {
+    background-color: var(--hijau-muda);
+}
+
+/* Konten utama */
+
+main {
+    width: 100%;
+    max-width: 1100px;
+    margin: 35px auto;
+    padding: 0 22px;
+}
+
+section {
+    background-color: var(--putih);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 12px rgba(75, 51, 36, 0.06);
+}
+
+h2 {
+    color: var(--hijau);
+    margin-top: 0;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 10px;
+}
+
+h3 {
+    color: var(--cokelat);
+}
+
+/* Link dan tombol */
+
+a {
+    color: var(--hijau);
+}
+
+button,
+input[type="submit"] {
+    background-color: var(--hijau);
+    color: var(--putih);
+    border: none;
+    border-radius: 8px;
+    padding: 11px 20px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover,
+input[type="submit"]:hover {
+    background-color: var(--hijau-muda);
+}
+
+/* Form */
+
+form p {
+    margin-bottom: 18px;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 6px;
+    color: var(--cokelat-gelap);
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+    width: 100%;
+    max-width: 600px;
+    padding: 11px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background-color: var(--putih);
+    color: var(--teks);
+    font: inherit;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid var(--hijau-muda);
+    border-color: var(--hijau);
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* Tabel */
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 18px;
+    background-color: var(--putih);
+}
+
+th {
+    background-color: var(--hijau);
+    color: var(--putih);
+    text-align: left;
+}
+
+th,
+td {
+    padding: 13px 15px;
+    border: 1px solid var(--border);
+}
+
+tbody tr:nth-child(even) {
+    background-color: var(--hijau-pucat);
+}
+
+tbody tr:hover {
+    background-color: #f0e6d5;
+}
+
+/* Pesan berhasil dan error */
+
+.flash {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 18px;
+}
+
+.flash-success {
+    color: #28552e;
+    background-color: #e2f2df;
+    border: 1px solid #a8cda1;
+}
+
+.flash-error {
+    color: #842d25;
+    background-color: #f9e5e1;
+    border: 1px solid #dfaaa2;
+}
+
+/* Kartu beranda */
+
+article {
+    background-color: var(--hijau-pucat);
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--hijau);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 15px 0;
+}
+
+article a {
+    display: inline-block;
+    background-color: var(--cokelat);
+    color: var(--putih);
+    padding: 9px 15px;
+    border-radius: 7px;
+    text-decoration: none;
+}
+
+article a:hover {
+    background-color: var(--cokelat-gelap);
+}
+
+/* Footer */
+
+footer {
+    background-color: var(--hijau);
+    color: var(--putih);
+    text-align: center;
+    padding: 22px;
+    margin-top: 45px;
+    border-top: 5px solid var(--cokelat);
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Tampilan HP */
+
+@media (max-width: 600px) {
+    header {
+        padding: 20px;
+    }
+
+    header h1 {
+        font-size: 23px;
+    }
+
+    nav {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    nav a {
+        display: block;
+    }
+
+    main {
+        margin: 20px auto;
+        padding: 0 12px;
+    }
+
+    section {
+        padding: 18px;
+    }
+
+    th,
+    td {
+        padding: 10px;
+        font-size: 14px;
+    }
+}

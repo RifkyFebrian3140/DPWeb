@@ -1,11 +1,12 @@
 <?php
-session_start();
+require_once __DIR__ . '/../includes/auth.php';
 
 $page_title = "Tambah Alat Kemah";
 include __DIR__ . '/../includes/header.php';
 
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
+
 ?>
 
 <main>

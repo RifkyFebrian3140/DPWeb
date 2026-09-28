@@ -24,5 +24,15 @@ if (!isset($page_title)) {
         <a href="/index.php">Beranda</a>
         <a href="/alatkemah/list.php">Data Alat Kemah</a>
         <a href="/anggota/list.php">Data Peminjam</a>
+
+        <?php if (isset($_SESSION['user_id'])): ?>
+            <span>
+                Petugas: <?= htmlspecialchars($_SESSION['nama']) ?>
+            </span>
+
+            <a href="/auth/logout.php">Logout</a>
+        <?php else: ?>
+            <a href="/auth/login.php">Login</a>
+        <?php endif; ?>
     </nav>
 </header>
