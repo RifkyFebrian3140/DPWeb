@@ -1,7 +1,6 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+
+require __DIR__ . '/../includes/auth.php';
 
 $page_title = "Tambah Peminjam";
 include __DIR__ . '/../includes/header.php';
