@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "version": 2,
   "functions": {
@@ -19,4 +20,27 @@
       "dest": "/api/$1"
     }
   ]
+=======
+{
+  "version": 2,
+  "functions": {
+    "api/**/*.php": {
+      "runtime": "vercel-php@0.9.0"
+    }
+  },
+  "routes": [
+    {
+      "src": "^/assets/(.*)$",
+      "dest": "/assets/$1"
+    },
+    {
+      "src": "^/$",
+      "dest": "/api/index.php"
+    },
+    {
+      "src": "^/(.*)$",
+      "dest": "/api/$1"
+    }
+  ]
+>>>>>>> 0762f6413fa933af1a320472983cb60aa6751ab8
 }

@@ -1,7 +1,16 @@
+<<<<<<< HEAD
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     nama VARCHAR(100) NOT NULL,
     username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     role VARCHAR(20) NOT NULL DEFAULT 'petugas'
+=======
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    nama VARCHAR(100) NOT NULL,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(20) NOT NULL DEFAULT 'petugas'
+>>>>>>> 0762f6413fa933af1a320472983cb60aa6751ab8
 );
