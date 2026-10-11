@@ -1,52 +1,91 @@
-```html
-<form>
-    <p>
-        <label for="nama">Nama Peminjam</label><br>
-        <input type="text" id="nama" name="nama" required>
-    </p>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Peminjam | Camp Gear</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
 
-    <p>
-        <label for="no_anggota">No. Peminjam</label><br>
-        <input type="text" id="no_anggota" name="no_anggota"
-               placeholder="Contoh: P004" required>
-    </p>
+    <header>
+        <h1>Camp Gear</h1>
+        <p>Sistem Peminjaman Alat Kemah</p>
 
-    <p>
-        <label for="alamat">Alamat</label><br>
-        <input type="text" id="alamat" name="alamat" required>
-    </p>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Beranda</a></li>
+                <li><a href="../alatkemah/list.html">Data Alat Kemah</a></li>
+                <li><a href="../alatkemah/tambah.html">Tambah Alat</a></li>
+                <li><a href="list.html">Data Peminjam</a></li>
+                <li><a href="tambah.html">Tambah Peminjam</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <p>
-        <label for="no_hp">No. HP</label><br>
-        <input type="tel" id="no_hp" name="no_hp"
-               placeholder="Contoh: 081234567890" required>
-    </p>
+    <main>
+        <section>
+            <h2>Tambah Peminjam</h2>
+            <p>
+                Isi formulir berikut untuk memasukkan anggota baru
+                ke dalam daftar peminjam alat kemah.
+            </p>
 
-    <p>
-        <label for="email">Email</label><br>
-        <input type="email" id="email" name="email">
-    </p>
+            <form action="#" method="post">
+                <p>
+                    <label for="nama">Nama Lengkap</label>
+                    <input
+                        type="text"
+                        id="nama"
+                        name="nama"
+                        placeholder="Masukkan nama lengkap"
+                        required
+                    >
+                </p>
 
-    <p>
-        <label for="alat">Alat Kemah yang Dipinjam</label><br>
-        <select id="alat" name="alat" required>
-            <option value="">Pilih alat kemah</option>
-            <option value="Tenda">Tenda</option>
-            <option value="Sleeping Bag">Sleeping Bag</option>
-            <option value="Kompor Portable">Kompor Portable</option>
-            <option value="Lampu Camping">Lampu Camping</option>
-            <option value="Matras">Matras</option>
-        </select>
-    </p>
+                <p>
+                    <label for="nim">NIM</label>
+                    <input
+                        type="text"
+                        id="nim"
+                        name="nim"
+                        placeholder="Masukkan NIM"
+                        required
+                    >
+                </p>
 
-    <p>
-        <label for="tanggal">Tanggal Meminjam</label><br>
-        <input type="date" id="tanggal" name="tanggal" required>
-    </p>
+                <p>
+                    <label for="telepon">Nomor Telepon</label>
+                    <input
+                        type="tel"
+                        id="telepon"
+                        name="telepon"
+                        placeholder="Contoh: 081234567890"
+                        required
+                    >
+                </p>
 
-    <p>
-        <button type="submit">Simpan</button>
-        <button type="reset">Reset</button>
-    </p>
-</form>
-```
+                <p>
+                    <label for="alamat">Alamat</label>
+                    <textarea
+                        id="alamat"
+                        name="alamat"
+                        rows="4"
+                        placeholder="Masukkan alamat lengkap"
+                        required
+                    ></textarea>
+                </p>
+
+                <button type="submit">Simpan Peminjam</button>
+                <button type="reset">Reset Form</button>
+                <a href="list.html">Kembali ke Daftar Peminjam</a>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Camp Gear | Sistem Peminjaman Alat Kemah</p>
+    </footer>
+
+</body>
+</html>

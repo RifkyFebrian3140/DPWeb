@@ -1,51 +1,120 @@
-<table>
-    <thead>
-        <tr>
-            <th>No. Peminjam</th>
-            <th>Nama</th>
-            <th>Alamat</th>
-            <th>No. HP</th>
-            <th>Alat yang Dipinjam</th>
-            <th>Tanggal Meminjam</th>
-            <th>Aksi</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>P001</td>
-            <td>Siti Aminah</td>
-            <td>Malang</td>
-            <td>0812xxxx</td>
-            <td>Tenda</td>
-            <td>10 Oktober 2026</td>
-            <td>
-                <button type="button">Edit</button>
-                <button type="button">Hapus</button>
-            </td>
-        </tr>
-        <tr>
-            <td>P002</td>
-            <td>Budi Santoso</td>
-            <td>Batu</td>
-            <td>0813xxxx</td>
-            <td>Sleeping Bag</td>
-            <td>11 Oktober 2026</td>
-            <td>
-                <button type="button">Edit</button>
-                <button type="button">Hapus</button>
-            </td>
-        </tr>
-        <tr>
-            <td>P003</td>
-            <td>Andi Pratama</td>
-            <td>Kepanjen</td>
-            <td>0815xxxx</td>
-            <td>Kompor Portable</td>
-            <td>11 Oktober 2026</td>
-            <td>
-                <button type="button">Edit</button>
-                <button type="button">Hapus</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Peminjam | Camp Gear</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Camp Gear</h1>
+        <p>Sistem Peminjaman Alat Kemah</p>
+
+        <nav>
+            <ul>
+                <li><a href="../index.html">Beranda</a></li>
+                <li><a href="../alatkemah/list.html">Data Alat Kemah</a></li>
+                <li><a href="../alatkemah/tambah.html">Tambah Alat</a></li>
+                <li><a href="list.html">Data Peminjam</a></li>
+                <li><a href="tambah.html">Tambah Peminjam</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Daftar Peminjam</h2>
+            <p>
+                Berikut adalah daftar anggota yang terdaftar
+                sebagai peminjam alat kemah.
+            </p>
+
+            <p>
+                <a href="tambah.html">+ Tambah Peminjam</a>
+            </p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Nama Anggota</th>
+                        <th>NIM</th>
+                        <th>No. Telepon</th>
+                        <th>Alamat</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Andi Pratama</td>
+                        <td>2401001</td>
+                        <td>081234567801</td>
+                        <td>Malang</td>
+                        <td>
+                            <button type="button">Edit</button>
+                            <button type="button">Hapus</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>2</td>
+                        <td>Budi Santoso</td>
+                        <td>2401002</td>
+                        <td>081234567802</td>
+                        <td>Batu</td>
+                        <td>
+                            <button type="button">Edit</button>
+                            <button type="button">Hapus</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>3</td>
+                        <td>Citra Lestari</td>
+                        <td>2401003</td>
+                        <td>081234567803</td>
+                        <td>Pasuruan</td>
+                        <td>
+                            <button type="button">Edit</button>
+                            <button type="button">Hapus</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>4</td>
+                        <td>Dimas Saputra</td>
+                        <td>2401004</td>
+                        <td>081234567804</td>
+                        <td>Blitar</td>
+                        <td>
+                            <button type="button">Edit</button>
+                            <button type="button">Hapus</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>5</td>
+                        <td> Eka Putri</td>
+                        <td>2401005</td>
+                        <td>081234567805</td>
+                        <td>Kediri</td>
+                        <td>
+                            <button type="button">Edit</button>
+                            <button type="button">Hapus</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Camp Gear | Sistem Peminjaman Alat Kemah</p>
+    </footer>
+
+</body>
+</html>
