@@ -570,3 +570,122 @@ footer p::before {
         scroll-behavior: auto !important;
     }
 }
+
+/* 1. Navbar hamburger menggunakan checkbox hack */
+.nav-toggle {
+    display: none;
+}
+
+.nav-toggle-label {
+    display: none;
+}
+
+/* 2. Tabel responsif */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table-responsive table {
+    min-width: 650px;
+}
+
+/* 3. Grid kartu statistik */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.stats-grid article {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+}
+
+/* =========================================
+   TABLET: Maksimal 768px
+   ========================================= */
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    body {
+        padding: 20px 4%;
+    }
+
+    section {
+        padding: 23px;
+    }
+}
+
+/* =========================================
+   MOBILE: Maksimal 480px
+   ========================================= */
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-toggle-label {
+        display: inline-block;
+        cursor: pointer;
+        padding: 10px 14px;
+        color: var(--forest);
+        background: var(--surface);
+        border: 1px solid var(--line);
+        font-size: 13px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .nav-toggle-label::before {
+        content: "\2630";
+        margin-right: 8px;
+        font-size: 16px;
+    }
+
+    .nav-toggle:checked + .nav-toggle-label::before {
+        content: "\2715";
+    }
+
+    header nav {
+        display: none;
+        margin-top: 15px;
+        padding-top: 15px;
+    }
+
+    .nav-toggle:checked + .nav-toggle-label + nav {
+        display: block;
+    }
+
+    header nav ul {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    header nav a {
+        display: block;
+        width: 100%;
+    }
+
+    header {
+        padding: 24px 18px;
+    }
+
+    section {
+        padding: 18px;
+    }
+
+    h1 {
+        font-size: 48px;
+    }
+
+    h2 {
+        font-size: 28px;
+    }
+}
