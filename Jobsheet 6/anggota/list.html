@@ -2,55 +2,73 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SIMPUS-Mini | Daftar Anggota</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Peminjam - Camp Gear</title>
     <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="../assets/js/app.js" defer></script>
+    <script src="../assets/js/anggota.js" defer></script>
 </head>
 <body>
-    <header>
-        <h1>SIMPUS-Mini</h1>
-        <button type="button" id="nav-toggle-btn" class="nav-toggle-label" aria-label="Menu">&#9776;</button>
-        <nav>
-            <ul>
-                <li><a href="../index.html">Beranda</a></li>
-                <li><a href="../buku/list.html">Daftar Buku</a></li>
-                <li><a href="list.html">Daftar Anggota</a></li>
-                <li><a href="tambah.html">Tambah Anggota</a></li>
-            </ul>
-        </nav>
-    </header>
+<header>
+    <a href="../index.html" class="logo">CAMP <span>GEAR</span></a>
+    <button type="button" class="nav-toggle-label" aria-expanded="false">☰ Menu</button>
+    <nav>
+        <ul>
+            <li><a href="../index.html">Beranda</a></li>
+            <li><a href="../alatkemah/list.html">Data Alat Kemah</a></li>
+            <li><a href="list.html" class="active">Data Peminjam</a></li>
+        </ul>
+    </nav>
+</header>
 
-    <main>
-        <section>
-            <h2>Daftar Anggota</h2>
-            <div class="search-box">
-                <label for="search-input">Cari Nama Anggota</label>
-                <input type="text" id="search-input" placeholder="Ketik nama anggota...">
+<main>
+    <section class="page-heading">
+        <p class="eyebrow">MANAJEMEN ANGGOTA</p>
+        <h1>Data Peminjam</h1>
+        <p>Data anggota dimuat secara dinamis dari file JSON.</p>
+    </section>
+
+    <section class="panel">
+        <div class="panel-heading">
+            <div>
+                <h2>Daftar Anggota</h2>
+                <p>Cari anggota melalui kolom pencarian.</p>
             </div>
-            <p id="loading-indicator" style="display:none;">Memuat data...</p>
-            <div class="table-responsive">
-            <table>
+            <a href="tambah.html" class="btn btn-primary">+ Tambah Peminjam</a>
+        </div>
+
+        <p id="loading-indicator" class="loading-indicator" role="status">
+            Memuat data peminjam...
+        </p>
+
+        <div class="table-responsive">
+            <table id="tabel-anggota">
                 <thead>
                     <tr>
-                        <th>No. Anggota</th>
+                        <th>No.</th>
                         <th>Nama</th>
+                        <th>Nomor Identitas</th>
+                        <th>Nomor Telepon</th>
                         <th>Alamat</th>
-                        <th>No. HP</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <!-- Baris diisi dinamis oleh assets/js/anggota.js via fetch('../data/anggota.json') -->
-                </tbody>
+                <tbody></tbody>
             </table>
-            </div>
-        </section>
-    </main>
+        </div>
 
-    <footer>
-        <p>&copy; 2026 SIMPUS-Mini &mdash; Jobsheet 6</p>
-    </footer>
-    <script src="../assets/js/app.js"></script>
-    <script src="../assets/js/anggota.js"></script>
+        <p class="helper-text">
+            Data berasal dari data/anggota.json. Hapus hanya mengubah tampilan.
+        </p>
+    </section>
+
+    <div class="back-link">
+        <a href="../index.html" class="text-link">&larr; Kembali ke Beranda</a>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2026 Camp Gear. Sistem Pengelolaan Alat Kemah.</p>
+</footer>
 </body>
 </html>

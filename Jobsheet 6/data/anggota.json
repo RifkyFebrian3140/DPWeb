@@ -1,6 +1,30 @@
 [
-    { "no_anggota": "A001", "nama": "Siti Aminah", "alamat": "Malang", "no_hp": "0812xxxx" },
-    { "no_anggota": "A002", "nama": "Budi Santoso", "alamat": "Batu", "no_hp": "0813xxxx" },
-    { "no_anggota": "A003", "nama": "Dewi Lestari", "alamat": "Malang", "no_hp": "0814xxxx" },
-    { "no_anggota": "A004", "nama": "Rizky Firmansyah", "alamat": "Lawang", "no_hp": "0815xxxx" }
+    {
+        "id": 1,
+        "nama": "Andi Pratama",
+        "nomor_identitas": "AG001",
+        "telepon": "081234567801",
+        "alamat": "Malang"
+    },
+    {
+        "id": 2,
+        "nama": "Budi Santoso",
+        "nomor_identitas": "AG002",
+        "telepon": "081234567802",
+        "alamat": "Batu"
+    },
+    {
+        "id": 3,
+        "nama": "Citra Lestari",
+        "nomor_identitas": "AG003",
+        "telepon": "081234567803",
+        "alamat": "Pasuruan"
+    },
+    {
+        "id": 4,
+        "nama": "Dimas Saputra",
+        "nomor_identitas": "AG004",
+        "telepon": "081234567804",
+        "alamat": "Kepanjen"
+    }
 ]

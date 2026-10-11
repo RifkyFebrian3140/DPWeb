@@ -1,40 +1,74 @@
-// Mengambil & menampilkan Daftar Anggota secara asinkron dari data/anggota.json
-async function muatDaftarAnggota() {
-    const tbody = document.querySelector(".table-responsive table tbody");
-    const loading = document.getElementById("loading-indicator");
-    if (!tbody) return;
+document.addEventListener("DOMContentLoaded", function () {
+    muatDataAnggota();
+});
 
-    loading.style.display = "block";
+async function muatDataAnggota() {
+    const tbody = document.querySelector("#tabel-anggota tbody");
+    const loading = document.getElementById("loading-indicator");
+
+    if (!tbody || !loading) return;
+
     tbody.innerHTML = "";
+    loading.hidden = false;
 
     try {
-        await new Promise((resolve) => setTimeout(resolve, 600));
-
-        const res = await fetch("../data/anggota.json");
-        if (!res.ok) {
-            throw new Error("Gagal mengambil data (status " + res.status + ")");
-        }
-        const daftarAnggota = await res.json();
-
-        daftarAnggota.forEach(function (anggota) {
-            const tr = document.createElement("tr");
-            tr.innerHTML =
-                "<td>" + anggota.no_anggota + "</td>" +
-                "<td>" + anggota.nama + "</td>" +
-                "<td>" + anggota.alamat + "</td>" +
-                "<td>" + anggota.no_hp + "</td>" +
-                "<td>" +
-                "<button type=\"button\">Edit</button> " +
-                "<button type=\"button\" class=\"btn-hapus\">Hapus</button>" +
-                "</td>";
-            tbody.appendChild(tr);
+        await new Promise(function (resolve) {
+            setTimeout(resolve, 600);
         });
-    } catch (err) {
+
+        const response = await fetch("../data/anggota.json");
+
+        if (!response.ok) {
+            throw new Error("Data peminjam gagal dimuat.");
+        }
+
+        const data = await response.json();
+
+        if (!Array.isArray(data) || data.length === 0) {
+            tbody.innerHTML =
+                '<tr><td colspan="6">Belum ada data peminjam.</td></tr>';
+            return;
+        }
+
+        data.forEach(function (anggota, index) {
+            const row = document.createElement("tr");
+
+            const values = [
+                index + 1,
+                anggota.nama,
+                anggota.nomor_identitas,
+                anggota.telepon,
+                anggota.alamat
+            ];
+
+            values.forEach(function (value) {
+                const cell = document.createElement("td");
+                cell.textContent = value;
+                row.appendChild(cell);
+            });
+
+            const aksi = document.createElement("td");
+
+            const edit = document.createElement("a");
+            edit.href = "tambah.html";
+            edit.className = "btn btn-small btn-secondary";
+            edit.textContent = "Edit";
+
+            const hapus = document.createElement("button");
+            hapus.type = "button";
+            hapus.className = "btn btn-small btn-danger btn-hapus";
+            hapus.textContent = "Hapus";
+
+            aksi.append(edit, document.createTextNode(" "), hapus);
+            row.appendChild(aksi);
+
+            tbody.appendChild(row);
+        });
+    } catch (error) {
+        console.error(error);
         tbody.innerHTML =
-            "<tr><td colspan=\"5\">Gagal memuat data: " + err.message + "</td></tr>";
+            '<tr><td colspan="6">Gagal memuat data peminjam. Periksa server dan file JSON.</td></tr>';
     } finally {
-        loading.style.display = "none";
+        loading.hidden = true;
     }
 }
-
-document.addEventListener("DOMContentLoaded", muatDaftarAnggota);
