@@ -1,0 +1,44 @@
+```html
+<form>
+    <p>
+        <label for="nama_alat">Nama Alat Kemah</label><br>
+        <input type="text" id="nama_alat" name="nama_alat"
+               placeholder="Contoh: Tenda Dome" required>
+    </p>
+
+    <p>
+        <label for="kategori">Kategori</label><br>
+        <select id="kategori" name="kategori" required>
+            <option value="">Pilih Kategori</option>
+            <option value="Tempat Tinggal">Tempat Tinggal</option>
+            <option value="Perlengkapan Tidur">Perlengkapan Tidur</option>
+            <option value="Peralatan Memasak">Peralatan Memasak</option>
+            <option value="Penerangan">Penerangan</option>
+            <option value="Perlengkapan Pendakian">Perlengkapan Pendakian</option>
+            <option value="Perlengkapan Istirahat">Perlengkapan Istirahat</option>
+            <option value="Lainnya">Lainnya</option>
+        </select>
+    </p>
+
+    <p>
+        <label for="stok">Jumlah Stok</label><br>
+        <input type="number" id="stok" name="stok"
+               min="0" placeholder="Contoh: 10" required>
+    </p>
+
+    <p>
+        <label for="kondisi">Kondisi Alat</label><br>
+        <select id="kondisi" name="kondisi" required>
+            <option value="">Pilih Kondisi</option>
+            <option value="Baik">Baik</option>
+            <option value="Perlu Perbaikan">Perlu Perbaikan</option>
+            <option value="Rusak">Rusak</option>
+        </select>
+    </p>
+
+    <p>
+        <button type="submit">Simpan</button>
+        <button type="reset">Reset</button>
+    </p>
+</form>
+```
