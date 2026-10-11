@@ -2,50 +2,79 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SIMPUS-Mini | Beranda</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camp Gear - Beranda</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/app.js" defer></script>
 </head>
 <body>
-    <header>
-        <h1>SIMPUS-Mini</h1>
-        <button type="button" id="nav-toggle-btn" class="nav-toggle-label" aria-label="Menu">&#9776;</button>
-        <nav>
-            <ul>
-                <li><a href="index.html">Beranda</a></li>
-                <li><a href="buku/list.html">Daftar Buku</a></li>
-                <li><a href="buku/tambah.html">Tambah Buku</a></li>
-                <li><a href="anggota/list.html">Daftar Anggota</a></li>
-            </ul>
-        </nav>
-    </header>
+<header>
+    <a href="index.html" class="logo">CAMP <span>GEAR</span></a>
+    <button type="button" class="nav-toggle-label" aria-expanded="false">☰ Menu</button>
+    <nav>
+        <ul>
+            <li><a href="index.html" class="active">Beranda</a></li>
+            <li><a href="alatkemah/list.html">Data Alat Kemah</a></li>
+            <li><a href="anggota/list.html">Data Peminjam</a></li>
+        </ul>
+    </nav>
+</header>
 
-    <main>
-        <section>
-            <h2>Selamat Datang di Sistem Perpustakaan Mini</h2>
-            <p>Aplikasi sederhana untuk mengelola data buku dan anggota perpustakaan.</p>
-        </section>
+<main>
+    <section class="hero">
+        <p class="eyebrow">PERLENGKAPAN PETUALANGAN</p>
+        <h1>Explore More.<br><span>Worry Less.</span></h1>
+        <p class="hero-description">
+            Kelola perlengkapan kemah dengan mudah. Siapkan peralatan,
+            atur data peminjam, dan mulai petualanganmu.
+        </p>
+        <div class="hero-actions">
+            <a href="alatkemah/list.html" class="btn btn-primary">Lihat Alat Kemah</a>
+            <a href="anggota/list.html" class="btn btn-secondary">Data Peminjam</a>
+        </div>
+    </section>
 
-        <section>
-            <h2>Ringkasan</h2>
-            <article>
-                <h3>Total Buku</h3>
-                <p>12</p>
-            </article>
-            <article>
-                <h3>Total Anggota</h3>
-                <p>8</p>
-            </article>
-            <article>
-                <h3>Sedang Dipinjam</h3>
-                <p>3</p>
-            </article>
-        </section>
-    </main>
+    <section class="content-section">
+        <div class="section-heading">
+            <p class="eyebrow">MENU UTAMA</p>
+            <h2>Pengelolaan Camp Gear</h2>
+            <p>Pilih menu untuk melihat dan mengelola data.</p>
+        </div>
 
-    <footer>
-        <p>&copy; 2026 SIMPUS-Mini &mdash; Jobsheet 6</p>
-    </footer>
-    <script src="assets/js/app.js"></script>
+        <div class="stats-grid">
+            <article class="stat-card">
+                <span class="stat-icon">01</span>
+                <h3>Data Alat Kemah</h3>
+                <p>Lihat daftar perlengkapan dan jumlah stok.</p>
+                <a href="alatkemah/list.html" class="text-link">Buka data &rarr;</a>
+            </article>
+            <article class="stat-card">
+                <span class="stat-icon">02</span>
+                <h3>Data Peminjam</h3>
+                <p>Lihat informasi anggota peminjam alat.</p>
+                <a href="anggota/list.html" class="text-link">Buka data &rarr;</a>
+            </article>
+            <article class="stat-card">
+                <span class="stat-icon">03</span>
+                <h3>Persiapan Kemah</h3>
+                <p>Pastikan perlengkapan tersedia sebelum digunakan.</p>
+                <a href="alatkemah/list.html" class="text-link">Cek perlengkapan &rarr;</a>
+            </article>
+        </div>
+    </section>
+
+    <section class="notice">
+        <div>
+            <p class="eyebrow">CAMP GEAR</p>
+            <h2>Petualangan dimulai dari persiapan.</h2>
+            <p>Kelola perlengkapanmu agar perjalanan lebih terencana.</p>
+        </div>
+        <a href="alatkemah/tambah.html" class="btn btn-primary">+ Tambah Alat</a>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2026 Camp Gear. Sistem Pengelolaan Alat Kemah.</p>
+</footer>
 </body>
 </html>
