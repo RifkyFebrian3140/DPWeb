@@ -1,244 +1,691 @@
-/* ===== Reset & Base ===== */
+/* =========================================
+   CAMP GEAR - NATURAL EXPEDITION THEME
+========================================= */
+
+:root {
+    --bg: #f3f1e7;
+    --surface: #fffdf6;
+    --surface-2: #e6eddd;
+    --forest: #35583d;
+    --green: #496b45;
+    --green-light: #6e8b5d;
+    --lime: #c9d9ad;
+    --cream: #293b2b;
+    --muted: #727d6b;
+    --line: #d5ddcb;
+    --wood: #c9a879;
+    --danger: #b84e3c;
+}
+
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-    font-family: "Segoe UI", Arial, sans-serif;
-    color: #2b2b2b;
-    background-color: #f5f6f8;
-    line-height: 1.5;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    color: var(--cream);
+    background-color: var(--bg);
+    line-height: 1.7;
+    padding: 28px 6%;
+    background-image:
+        repeating-linear-gradient(
+            135deg,
+            transparent 0,
+            transparent 49px,
+            #60784b09 50px,
+            transparent 51px
+        );
 }
 
-a {
-    color: #1d5b8a;
-    text-decoration: none;
+h1,
+h2,
+h3 {
+    font-family: Impact, "Arial Narrow", sans-serif;
+    font-weight: normal;
+    text-transform: uppercase;
+    line-height: 1.1;
 }
 
-a:hover {
-    text-decoration: underline;
+h1 {
+    font-size: clamp(48px, 8vw, 94px);
+    letter-spacing: -2px;
 }
 
-/* ===== Header & Navbar (Flexbox) ===== */
+h2 {
+    font-size: clamp(28px, 4vw, 43px);
+    letter-spacing: -1px;
+    margin-bottom: 22px;
+}
+
+h3 {
+    font-size: 23px;
+    letter-spacing: 0.3px;
+}
+
+p {
+    color: var(--muted);
+}
+
+::selection {
+    color: white;
+    background: var(--green);
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
 header {
-    background-color: #1d5b8a;
-    color: #fff;
-    padding: 1rem 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    background: var(--forest);
+    color: var(--surface);
+    padding: 36px 38px 25px;
+    margin-bottom: 42px;
+    border-bottom: 8px solid var(--wood);
+    box-shadow: 9px 9px 0 #35583d20;
+}
+
+header::before {
+    content: "FIELD EQUIPMENT / EST. 2026";
+    position: absolute;
+    right: 24px;
+    top: 24px;
+    padding: 7px 11px;
+    border: 1px solid #ffffff70;
+    font-family: monospace;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: var(--surface);
+    transform: rotate(3deg);
+}
+
+header::after {
+    content: "CG";
+    position: absolute;
+    z-index: -1;
+    right: 8px;
+    bottom: -88px;
+    color: #ffffff0d;
+    font-family: Impact, sans-serif;
+    font-size: clamp(180px, 25vw, 330px);
+    line-height: 1;
+    pointer-events: none;
 }
 
 header h1 {
-    font-size: 1.4rem;
+    position: relative;
+    z-index: 1;
+    color: var(--surface);
+}
+
+header > p {
+    color: #e0e8d7;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+/* NAVIGATION */
+
+header nav {
+    position: relative;
+    z-index: 2;
+    margin-top: 32px;
+    padding-top: 17px;
+    border-top: 1px solid #ffffff35;
 }
 
 header nav ul {
-    list-style: none;
     display: flex;
-    gap: 1.25rem;
+    flex-wrap: wrap;
+    gap: 9px;
+    list-style: none;
 }
 
 header nav a {
-    color: #fff;
-    font-weight: 500;
+    display: inline-block;
+    padding: 10px 14px;
+    background: #e7eadc;
+    color: var(--forest);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    border: 1px solid #e7eadc;
+    transition: 0.2s ease;
 }
 
-/* ===== Main Layout ===== */
+header nav a:hover {
+    color: white;
+    background: var(--green-light);
+    border-color: var(--green-light);
+    transform: translateY(-3px);
+}
+
+/* =========================================
+   MAIN CONTENT
+========================================= */
+
 main {
-    max-width: 1000px;
-    margin: 2rem auto;
-    padding: 0 1.5rem;
+    max-width: 1250px;
+    margin: 0 auto;
 }
 
 section {
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    position: relative;
+    padding: 32px;
+    margin-bottom: 28px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 5px solid var(--green);
+    box-shadow: 7px 7px 0 #35583d0c;
 }
 
 section h2 {
-    margin-bottom: 1rem;
-    color: #1d5b8a;
+    color: var(--forest);
 }
 
-/* ===== Kartu Statistik (CSS Grid) ===== */
-main section:nth-of-type(2) {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+section h2::before {
+    content: "// ";
+    color: var(--wood);
+    font-family: monospace;
+    font-size: 0.7em;
 }
 
-main section:nth-of-type(2) article {
-    background-color: #eef4fa;
-    border-radius: 8px;
-    padding: 1.25rem;
-    text-align: center;
+section > p {
+    max-width: 760px;
+    margin-bottom: 12px;
+    font-size: 15px;
 }
 
-main section:nth-of-type(2) article h3 {
-    font-size: 0.95rem;
-    color: #55677a;
-    margin-bottom: 0.5rem;
+/* =========================================
+   SUMMARY CARDS
+========================================= */
+
+article {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    width: calc(33.333% - 17px);
+    min-width: 175px;
+    min-height: 160px;
+    margin: 7px 7px 7px 0;
+    padding: 23px;
+    overflow: hidden;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-bottom: 4px solid var(--wood);
+    transition: 0.25s ease;
 }
 
-main section:nth-of-type(2) article p {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #1d5b8a;
+article::after {
+    content: "+";
+    position: absolute;
+    right: 12px;
+    bottom: -30px;
+    font-family: Impact, sans-serif;
+    font-size: 110px;
+    color: #35583d0c;
+    pointer-events: none;
 }
 
-/* ===== Tabel ===== */
+article:hover {
+    background: #dce8d0;
+    transform: translateY(-5px);
+    border-bottom-color: var(--green);
+}
+
+article h3 {
+    color: var(--muted);
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+article p {
+    margin-top: 16px;
+    color: var(--forest);
+    font-family: Impact, "Arial Narrow", sans-serif;
+    font-size: 51px;
+    line-height: 1;
+}
+
+/* =========================================
+   TABLE
+========================================= */
+
 table {
     width: 100%;
+    margin-top: 22px;
     border-collapse: collapse;
-}
-
-th, td {
-    text-align: left;
-    padding: 0.65rem 0.75rem;
-    border-bottom: 1px solid #e2e6ea;
+    border: 1px solid var(--line);
+    background: var(--surface);
 }
 
 thead {
-    background-color: #1d5b8a;
-    color: #fff;
+    background: var(--green);
+    color: var(--surface);
+}
+
+th {
+    padding: 16px 14px;
+    text-align: left;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+}
+
+td {
+    padding: 16px 14px;
+    color: var(--cream);
+    font-size: 13px;
+    border-bottom: 1px solid var(--line);
+}
+
+tbody tr {
+    transition: background 0.18s ease;
 }
 
 tbody tr:nth-child(even) {
-    background-color: #f7f9fb;
+    background: #f2f5eb;
 }
 
 tbody tr:hover {
-    background-color: #eef4fa;
+    background: #e5edda;
 }
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* =========================================
+   FORMS
+========================================= */
+
+form {
+    max-width: 720px;
+}
+
+form p {
+    margin-bottom: 23px;
+}
+
+label {
+    display: block;
+    margin-bottom: 9px;
+    color: var(--forest);
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 15px 16px;
+    color: var(--cream);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 0;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #969d8d;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+    border-color: #9eaf8e;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--green-light);
+    box-shadow: 4px 4px 0 #6e8b5d20;
+}
+
+select option {
+    background: var(--surface);
+    color: var(--cream);
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+button {
+    padding: 12px 20px;
+    margin: 4px 5px 4px 0;
+    border: 1px solid var(--green);
+    background: var(--green);
+    color: white;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+button:hover {
+    background: var(--green-light);
+    border-color: var(--green-light);
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+button[type="reset"] {
+    color: var(--forest);
+    background: transparent;
+    border-color: var(--wood);
+}
+
+button[type="reset"]:hover {
+    color: white;
+    background: var(--wood);
+    border-color: var(--wood);
+}
+
+/* TABLE ACTION BUTTONS */
 
 td button {
-    padding: 0.35rem 0.7rem;
-    margin-right: 0.35rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.85rem;
+    padding: 8px 11px;
+    font-size: 10px;
 }
 
-td button:first-of-type {
-    background-color: #f0ad4e;
-    color: #fff;
+td button:last-child {
+    color: var(--danger);
+    background: transparent;
+    border-color: #b84e3c66;
 }
 
-td button:last-of-type {
-    background-color: #d9534f;
-    color: #fff;
+td button:last-child:hover {
+    color: white;
+    background: var(--danger);
+    border-color: var(--danger);
 }
 
-/* ===== Form ===== */
-form p {
-    margin-bottom: 1rem;
+/* =========================================
+   LINKS
+========================================= */
+
+a {
+    color: var(--green);
+    text-underline-offset: 4px;
 }
 
-form label {
-    display: block;
-    margin-bottom: 0.35rem;
-    font-weight: 600;
-    color: #444;
+main a:hover {
+    color: #9a6f3d;
 }
 
-form input,
-form select {
-    width: 100%;
-    max-width: 400px;
-    padding: 0.55rem 0.7rem;
-    border: 1px solid #cdd4da;
-    border-radius: 4px;
-    font-size: 1rem;
-}
+/* =========================================
+   FOOTER
+========================================= */
 
-form button[type="submit"] {
-    background-color: #1d5b8a;
-    color: #fff;
-    border: none;
-    padding: 0.6rem 1.5rem;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-}
-
-form button[type="submit"]:hover {
-    background-color: #164869;
-}
-
-/* ===== Footer ===== */
 footer {
-    text-align: center;
-    padding: 1.25rem;
-    color: #7a8794;
-    font-size: 0.9rem;
+    max-width: 1250px;
+    margin: 40px auto 0;
+    padding: 24px 0;
+    border-top: 2px solid var(--line);
+    text-align: left;
+    font-family: monospace;
+    font-size: 12px;
+    letter-spacing: 1px;
 }
 
-/* ===== Tabel Responsif ===== */
-.table-responsive {
-    overflow-x: auto;
+footer p {
+    color: var(--muted);
 }
 
-/* ===== Hamburger Menu (checkbox hack) ===== */
+footer p::before {
+    content: "● ";
+    color: var(--green);
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 850px) {
+    body {
+        padding: 20px 4%;
+    }
+
+    header {
+        padding: 28px 24px 22px;
+    }
+
+    header::before {
+        position: relative;
+        display: inline-block;
+        right: auto;
+        top: auto;
+        margin-bottom: 20px;
+    }
+
+    header nav ul {
+        gap: 7px;
+    }
+
+    header nav a {
+        padding: 9px 11px;
+    }
+
+    section {
+        padding: 23px;
+    }
+
+    article {
+        width: calc(50% - 12px);
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 520px) {
+    h1 {
+        font-size: 53px;
+    }
+
+    h2 {
+        font-size: 30px;
+    }
+
+    header::after {
+        font-size: 190px;
+    }
+
+    header nav ul {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    header nav a {
+        height: 100%;
+        font-size: 10px;
+    }
+
+    section {
+        padding: 18px;
+    }
+
+    article {
+        display: block;
+        width: 100%;
+        min-height: 125px;
+        margin: 12px 0;
+    }
+
+    article p {
+        font-size: 43px;
+    }
+
+    th,
+    td {
+        padding: 12px;
+    }
+}
+
+/* ACCESSIBILITY */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* 1. Navbar hamburger menggunakan checkbox hack */
 .nav-toggle {
     display: none;
 }
 
 .nav-toggle-label {
     display: none;
-    font-size: 1.6rem;
-    color: #fff;
-    cursor: pointer;
 }
 
-/* ===== Responsive Breakpoints ===== */
+/* 2. Tabel responsif */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
 
-/* Tablet ke bawah */
+.table-responsive table {
+    min-width: 650px;
+}
+
+/* 3. Grid kartu statistik */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.stats-grid article {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+}
+
+/* =========================================
+   TABLET: Maksimal 768px
+   ========================================= */
 @media (max-width: 768px) {
-    main section:nth-of-type(2) {
-        grid-template-columns: repeat(2, 1fr);
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    body {
+        padding: 20px 4%;
+    }
+
+    section {
+        padding: 23px;
     }
 }
 
-/* Mobile */
+/* =========================================
+   MOBILE: Maksimal 480px
+   ========================================= */
 @media (max-width: 480px) {
-    header {
-        position: relative;
+    .stats-grid {
+        grid-template-columns: 1fr;
     }
 
     .nav-toggle-label {
-        display: block;
+        display: inline-block;
+        cursor: pointer;
+        padding: 10px 14px;
+        color: var(--forest);
+        background: var(--surface);
+        border: 1px solid var(--line);
+        font-size: 13px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .nav-toggle-label::before {
+        content: "\2630";
+        margin-right: 8px;
+        font-size: 16px;
+    }
+
+    .nav-toggle:checked + .nav-toggle-label::before {
+        content: "\2715";
     }
 
     header nav {
         display: none;
-        width: 100%;
-        order: 3;
-        margin-top: 1rem;
+        margin-top: 15px;
+        padding-top: 15px;
     }
 
-    .nav-toggle:checked ~ nav {
+    .nav-toggle:checked + .nav-toggle-label + nav {
         display: block;
     }
 
     header nav ul {
+        display: flex;
         flex-direction: column;
-        gap: 0.75rem;
+        gap: 8px;
     }
 
-    main section:nth-of-type(2) {
-        grid-template-columns: 1fr;
+    header nav a {
+        display: block;
+        width: 100%;
     }
 
-    form input,
-    form select {
-        max-width: 100%;
+    header {
+        padding: 24px 18px;
+    }
+
+    section {
+        padding: 18px;
+    }
+
+    h1 {
+        font-size: 48px;
+    }
+
+    h2 {
+        font-size: 28px;
     }
 }
