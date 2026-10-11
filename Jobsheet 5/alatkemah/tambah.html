@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Alat Kemah - Camp Gear</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="../assets/js/app.js" defer></script>
+</head>
+<body>
+    <header>
+        <a href="../index.html" class="logo">CAMP <span>GEAR</span></a>
+
+        <button type="button" class="nav-toggle-label"
+                aria-label="Buka atau tutup menu" aria-expanded="false">
+            ☰ Menu
+        </button>
+
+        <nav>
+            <ul>
+                <li><a href="../index.html">Beranda</a></li>
+                <li><a href="list.html" class="active">Data Alat Kemah</a></li>
+                <li><a href="../anggota/list.html">Data Peminjam</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-heading">
+            <p class="eyebrow">MANAJEMEN PERLENGKAPAN</p>
+            <h1>Tambah Alat Kemah</h1>
+            <p>Isi formulir berikut untuk menambahkan data perlengkapan.</p>
+        </section>
+
+        <section class="panel form-panel">
+            <h2>Informasi Alat</h2>
+
+            <form class="data-form">
+                <div class="form-group">
+                    <label for="nama_alat">Nama Alat</label>
+                    <input type="text" id="nama_alat" name="nama_alat"
+                           placeholder="Contoh: Tenda Dome" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="kategori">Kategori</label>
+                    <select id="kategori" name="kategori" required>
+                        <option value="">-- Pilih Kategori --</option>
+                        <option value="Tenda">Tenda</option>
+                        <option value="Perlengkapan Tidur">Perlengkapan Tidur</option>
+                        <option value="Memasak">Memasak</option>
+                        <option value="Penerangan">Penerangan</option>
+                        <option value="Lainnya">Lainnya</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="stok">Jumlah Stok</label>
+                    <input type="number" id="stok" name="stok"
+                           min="0" step="1" placeholder="Masukkan jumlah stok" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="kondisi">Kondisi Alat</label>
+                    <select id="kondisi" name="kondisi" required>
+                        <option value="">-- Pilih Kondisi --</option>
+                        <option value="Baik">Baik</option>
+                        <option value="Perlu Dicek">Perlu Dicek</option>
+                        <option value="Rusak">Rusak</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Simpan Data</button>
+                    <a href="list.html" class="btn btn-secondary">Batal</a>
+                </div>
+            </form>
+
+            <p class="helper-text">Form ini hanya melakukan validasi di browser, belum menyimpan data.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Camp Gear. Sistem Pengelolaan Alat Kemah.</p>
+    </footer>
+</body>
+</html>

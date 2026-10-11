@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Alat Kemah - Camp Gear</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="../assets/js/app.js" defer></script>
+</head>
+<body>
+    <header>
+        <a href="../index.html" class="logo">CAMP <span>GEAR</span></a>
+
+        <button type="button" class="nav-toggle-label"
+                aria-label="Buka atau tutup menu" aria-expanded="false">
+            ☰ Menu
+        </button>
+
+        <nav>
+            <ul>
+                <li><a href="../index.html">Beranda</a></li>
+                <li><a href="list.html" class="active">Data Alat Kemah</a></li>
+                <li><a href="../anggota/list.html">Data Peminjam</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-heading">
+            <p class="eyebrow">MANAJEMEN PERLENGKAPAN</p>
+            <h1>Data Alat Kemah</h1>
+            <p>Lihat dan kelola daftar perlengkapan yang tersedia.</p>
+        </section>
+
+        <section class="panel">
+            <div class="panel-heading">
+                <div>
+                    <h2>Daftar Perlengkapan</h2>
+                    <p>Gunakan kolom pencarian untuk menemukan alat.</p>
+                </div>
+                <a href="tambah.html" class="btn btn-primary">+ Tambah Alat</a>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Nama Alat</th>
+                            <th>Kategori</th>
+                            <th>Stok</th>
+                            <th>Kondisi</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Tenda Dome</td>
+                            <td>Tenda</td>
+                            <td>5</td>
+                            <td><span class="status status-good">Baik</span></td>
+                            <td>
+                                <a href="tambah.html" class="btn btn-small btn-secondary">Edit</a>
+                                <button type="button" class="btn btn-small btn-danger btn-hapus">Hapus</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Sleeping Bag</td>
+                            <td>Perlengkapan Tidur</td>
+                            <td>8</td>
+                            <td><span class="status status-good">Baik</span></td>
+                            <td>
+                                <a href="tambah.html" class="btn btn-small btn-secondary">Edit</a>
+                                <button type="button" class="btn btn-small btn-danger btn-hapus">Hapus</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Kompor Portable</td>
+                            <td>Memasak</td>
+                            <td>0</td>
+                            <td><span class="status status-warning">Perlu Dicek</span></td>
+                            <td>
+                                <a href="tambah.html" class="btn btn-small btn-secondary">Edit</a>
+                                <button type="button" class="btn btn-small btn-danger btn-hapus">Hapus</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Matras</td>
+                            <td>Perlengkapan Tidur</td>
+                            <td>10</td>
+                            <td><span class="status status-good">Baik</span></td>
+                            <td>
+                                <a href="tambah.html" class="btn btn-small btn-secondary">Edit</a>
+                                <button type="button" class="btn btn-small btn-danger btn-hapus">Hapus</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p class="helper-text">Catatan: data contoh dan perubahan hapus hanya berlaku selama halaman terbuka.</p>
+        </section>
+
+        <div class="back-link">
+            <a href="../index.html" class="text-link">&larr; Kembali ke Beranda</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Camp Gear. Sistem Pengelolaan Alat Kemah.</p>
+    </footer>
+</body>
+</html>

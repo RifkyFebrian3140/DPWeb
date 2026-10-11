@@ -2,72 +2,105 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SIMPUS-Mini | Daftar Anggota</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Peminjam - Camp Gear</title>
     <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="../assets/js/app.js" defer></script>
 </head>
 <body>
     <header>
-        <h1>SIMPUS-Mini</h1>
-        <button type="button" id="nav-toggle-btn" class="nav-toggle-label" aria-label="Menu">&#9776;</button>
+        <a href="../index.html" class="logo">CAMP <span>GEAR</span></a>
+
+        <button type="button" class="nav-toggle-label"
+                aria-label="Buka atau tutup menu" aria-expanded="false">
+            ☰ Menu
+        </button>
+
         <nav>
             <ul>
                 <li><a href="../index.html">Beranda</a></li>
-                <li><a href="../buku/list.html">Daftar Buku</a></li>
-                <li><a href="list.html">Daftar Anggota</a></li>
-                <li><a href="tambah.html">Tambah Anggota</a></li>
+                <li><a href="../alatkemah/list.html">Data Alat Kemah</a></li>
+                <li><a href="list.html" class="active">Data Peminjam</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <section>
-            <h2>Daftar Anggota</h2>
-            <div class="search-box">
-                <label for="search-input">Cari Nama Anggota</label>
-                <input type="text" id="search-input" placeholder="Ketik nama anggota...">
-            </div>
-            <div class="table-responsive">
-            <table>
-                <thead>
-                    <tr>
-                        <th>No. Anggota</th>
-                        <th>Nama</th>
-                        <th>Alamat</th>
-                        <th>No. HP</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>A001</td>
-                        <td>Siti Aminah</td>
-                        <td>Malang</td>
-                        <td>0812xxxx</td>
-                        <td>
-                            <button type="button">Edit</button>
-                            <button type="button" class="btn-hapus">Hapus</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>A002</td>
-                        <td>Budi Santoso</td>
-                        <td>Batu</td>
-                        <td>0813xxxx</td>
-                        <td>
-                            <button type="button">Edit</button>
-                            <button type="button" class="btn-hapus">Hapus</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            </div>
+        <section class="page-heading">
+            <p class="eyebrow">MANAJEMEN ANGGOTA</p>
+            <h1>Data Peminjam</h1>
+            <p>Kelola informasi anggota yang dapat meminjam perlengkapan.</p>
         </section>
+
+        <section class="panel">
+            <div class="panel-heading">
+                <div>
+                    <h2>Daftar Anggota</h2>
+                    <p>Gunakan kolom pencarian untuk menemukan anggota.</p>
+                </div>
+                <a href="tambah.html" class="btn btn-primary">+ Tambah Peminjam</a>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Nama</th>
+                            <th>Nomor Identitas</th>
+                            <th>Nomor Telepon</th>
+                            <th>Alamat</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Andi Pratama</td>
+                            <td>AG001</td>
+                            <td>081234567801</td>
+                            <td>Malang</td>
+                            <td>
+                                <a href="tambah.html" class="btn btn-small btn-secondary">Edit</a>
+                                <button type="button" class="btn btn-small btn-danger btn-hapus">Hapus</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Budi Santoso</td>
+                            <td>AG002</td>
+                            <td>081234567802</td>
+                            <td>Batu</td>
+                            <td>
+                                <a href="tambah.html" class="btn btn-small btn-secondary">Edit</a>
+                                <button type="button" class="btn btn-small btn-danger btn-hapus">Hapus</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Citra Lestari</td>
+                            <td>AG003</td>
+                            <td>081234567803</td>
+                            <td>Pasuruan</td>
+                            <td>
+                                <a href="tambah.html" class="btn btn-small btn-secondary">Edit</a>
+                                <button type="button" class="btn btn-small btn-danger btn-hapus">Hapus</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p class="helper-text">Catatan: data contoh dan perubahan hapus hanya berlaku selama halaman terbuka.</p>
+        </section>
+
+        <div class="back-link">
+            <a href="../index.html" class="text-link">&larr; Kembali ke Beranda</a>
+        </div>
     </main>
 
     <footer>
-        <p>&copy; 2026 SIMPUS-Mini &mdash; Jobsheet 5</p>
+        <p>&copy; 2026 Camp Gear. Sistem Pengelolaan Alat Kemah.</p>
     </footer>
-    <script src="../assets/js/app.js"></script>
 </body>
 </html>
