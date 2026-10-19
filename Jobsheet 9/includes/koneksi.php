@@ -1,10 +1,10 @@
 <?php
 // Kredensial database diatur melalui Environment Variables (lokal/Vercel).
-$host = getenv('DB_HOST') ?: '';
+$host = getenv('DB_HOST') ?: 'aws-0-ap-southeast-2.pooler.supabase.com';
 $port = getenv('DB_PORT') ?: '5432';
 $dbname = getenv('DB_NAME') ?: 'postgres';
-$user = getenv('DB_USER') ?: '';
-$pass = getenv('DB_PASS') ?: '';
+$user = getenv('DB_USER') ?: 'postgres.orjgtukmxsnfdbqtwspk';
+$pass = getenv('DB_PASS') ?: 'akutampan3140';
 $sslmode = getenv('DB_SSLMODE') ?: 'require';
 
 if ($host === '' || $user === '' || $pass === '') {
