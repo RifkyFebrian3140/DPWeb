@@ -62,7 +62,7 @@ $active_page = $active_page ?? '';
 </header>
 
 <?php if (!empty($_SESSION['flash'])): ?>
-    <div class="flash-message" role="status">
+    <div class="flash-message <?= htmlspecialchars($_SESSION['flash']['type'] ?? 'success', ENT_QUOTES, 'UTF-8') ?>" role="status">
         <?= htmlspecialchars(
             $_SESSION['flash']['message'],
             ENT_QUOTES,

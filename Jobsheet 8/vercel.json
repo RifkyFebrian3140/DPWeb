@@ -1,20 +1,11 @@
 {
   "functions": {
     "api/index.php": {
-      "runtime": "vercel-php@0.9.0"
+      "runtime": "vercel-php@0.9.0",
+      "includeFiles": "assets/**,includes/**,alatkemah/**,anggota/**,index.php"
     }
   },
   "routes": [
-    {
-      "src": "/assets/(.*)",
-      "dest": "/assets/$1",
-      "continue": true
-    },
-    {
-      "src": "/(.*\\.(?:css|js|png|jpg|jpeg|gif|svg|ico|woff2?))$",
-      "dest": "/$1",
-      "continue": true
-    },
     {
       "src": "/(.*)",
       "dest": "/api/index.php"

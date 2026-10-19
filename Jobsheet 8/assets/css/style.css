@@ -674,3 +674,9 @@ footer p {
     font-size: 14px;
     font-weight: 700;
 }
+
+.flash-message.error {
+    border-color: #efc1bd;
+    background: #fff0ef;
+    color: #8f2921;
+}
