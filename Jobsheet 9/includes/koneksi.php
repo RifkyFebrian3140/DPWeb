@@ -1,20 +1,27 @@
 <?php
-$host = "aws-0-ap-southeast-1.pooler.supabase.com";
-$port = "5432";
-$dbname = "postgres";
-$user = "postgres.vgypxaibjupqvutmgymm";
-$password = "akutampan3140";
+// Kredensial database diatur melalui Environment Variables (lokal/Vercel).
+$host = getenv('DB_HOST') ?: '';
+$port = getenv('DB_PORT') ?: '5432';
+$dbname = getenv('DB_NAME') ?: 'postgres';
+$user = getenv('DB_USER') ?: '';
+$pass = getenv('DB_PASS') ?: '';
+$sslmode = getenv('DB_SSLMODE') ?: 'require';
+
+if ($host === '' || $user === '' || $pass === '') {
+    http_response_code(500);
+    exit('Konfigurasi database belum lengkap. Atur DB_HOST, DB_USER, dan DB_PASS pada environment variables.');
+}
+
+$dsn = "pgsql:host={$host};port={$port};dbname={$dbname};sslmode={$sslmode}";
 
 try {
-    $pdo = new PDO(
-        "pgsql:host=$host;port=$port;dbname=$dbname;sslmode=require",
-        $user,
-        $password
-    );
-
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Koneksi Supabase berhasil!";
+    $pdo = new PDO($dsn, $user, $pass, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_EMULATE_PREPARES => false,
+    ]);
 } catch (PDOException $e) {
-    die("Koneksi gagal: " . $e->getMessage());
+    error_log('Koneksi PostgreSQL gagal: ' . $e->getMessage());
+    http_response_code(500);
+    exit('Koneksi database gagal. Periksa environment variables dan dukungan pdo_pgsql.');
 }
-?>

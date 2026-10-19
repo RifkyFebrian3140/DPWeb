@@ -1,49 +1,49 @@
 <?php
-session_start();
+// Front controller: serves CSS/JS and routes PHP pages for Vercel.
+$path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
+$path = rawurldecode($path);
 
-require __DIR__ . '/includes/koneksi.php';
+// Serve assets through the PHP function so they do not depend on a public/ folder.
+$assets = [
+    '/assets/css/style.css' => [__DIR__ . '/../assets/css/style.css', 'text/css; charset=utf-8'],
+    '/assets/js/apps.js' => [__DIR__ . '/../assets/js/apps.js', 'application/javascript; charset=utf-8'],
+];
+if (isset($assets[$path])) {
+    [$file, $contentType] = $assets[$path];
+    if (!is_file($file)) {
+        http_response_code(404);
+        exit('Asset tidak ditemukan');
+    }
+    header('Content-Type: ' . $contentType);
+    header('Cache-Control: public, max-age=3600');
+    readfile($file);
+    exit;
+}
 
-$page_title = "Beranda";
+$routes = [
+    '/' => 'index.php',
+    '/index.php' => 'index.php',
+    '/alatkemah' => 'alatkemah/list.php',
+    '/alatkemah/' => 'alatkemah/list.php',
+    '/alatkemah/list.php' => 'alatkemah/list.php',
+    '/alatkemah/tambah.php' => 'alatkemah/tambah.php',
+    '/alatkemah/proses_tambah.php' => 'alatkemah/proses_tambah.php',
+    '/alatkemah/edit.php' => 'alatkemah/edit.php',
+    '/alatkemah/proses_edit.php' => 'alatkemah/proses_edit.php',
+    '/alatkemah/hapus.php' => 'alatkemah/hapus.php',
+    '/anggota' => 'anggota/list.php',
+    '/anggota/' => 'anggota/list.php',
+    '/anggota/list.php' => 'anggota/list.php',
+    '/anggota/tambah.php' => 'anggota/tambah.php',
+    '/anggota/proses_tambah.php' => 'anggota/proses_tambah.php',
+    '/anggota/edit.php' => 'anggota/edit.php',
+    '/anggota/proses_edit.php' => 'anggota/proses_edit.php',
+    '/anggota/hapus.php' => 'anggota/hapus.php',
+];
 
-$totalAlat = $pdo
-    ->query("SELECT COUNT(*) FROM alat")
-    ->fetchColumn();
-
-$totalPeminjam = $pdo
-    ->query("SELECT COUNT(*) FROM anggota")
-    ->fetchColumn();
-
-include __DIR__ . '/includes/header.php';
-?>
-
-<main>
-    <section>
-        <h2>Selamat Datang di Sistem Peminjaman Alat Kemah</h2>
-        <p>
-            Aplikasi sederhana untuk mengelola data alat kemah
-            dan data peminjam.
-        </p>
-    </section>
-
-    <section>
-        <h2>Ringkasan Data</h2>
-
-        <article>
-            <h3>Total Alat Kemah</h3>
-            <p><?= htmlspecialchars((string) $totalAlat) ?></p>
-            <a href="/alatkemah/list.php">
-                Lihat Data Alat
-            </a>
-        </article>
-
-        <article>
-            <h3>Total Peminjam</h3>
-            <p><?= htmlspecialchars((string) $totalPeminjam) ?></p>
-            <a href="/anggota/list.php">
-                Lihat Data Peminjam
-            </a>
-        </article>
-    </section>
-</main>
-
-<?php include __DIR__ . '/includes/footer.php'; ?>
+if (!isset($routes[$path])) {
+    http_response_code(404);
+    header('Content-Type: text/plain; charset=utf-8');
+    exit('Halaman tidak ditemukan');
+}
+require __DIR__ . '/../' . $routes[$path];

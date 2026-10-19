@@ -1,59 +1,45 @@
 <?php
-session_start();
-
+require __DIR__ . '/../includes/init.php';
 require __DIR__ . '/../includes/koneksi.php';
 
-// Ambil data dari form
-$namaAlat = trim($_POST['nama_alat'] ?? '');
-$kategori = trim($_POST['kategori'] ?? '');
-$stok = $_POST['stok'] ?? '';
-$kondisi = trim($_POST['kondisi'] ?? 'Baik');
-
-// Validasi
-$errors = [];
-
-if ($namaAlat === '') {
-    $errors[] = 'Nama alat wajib diisi.';
-}
-
-if (!filter_var($stok, FILTER_VALIDATE_INT) || (int) $stok < 0) {
-    $errors[] = 'Stok harus berupa bilangan bulat dan tidak boleh negatif.';
-}
-
-$kondisiValid = ['Baik', 'Rusak Ringan', 'Rusak Berat'];
-
-if (!in_array($kondisi, $kondisiValid, true)) {
-    $errors[] = 'Kondisi alat tidak valid.';
-}
-
-// Jika validasi gagal, kembali ke form
-if (!empty($errors)) {
-    $_SESSION['flash'] = [
-        'type' => 'error',
-        'pesan' => implode(' ', $errors)
-    ];
-
-    header('Location: /alatkemah/tambah.php');
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Location: tambah.php');
     exit;
 }
 
-// Simpan ke database
-$stmt = $pdo->prepare(
-    "INSERT INTO alat (nama_alat, kategori, stok, kondisi)
-     VALUES (:nama_alat, :kategori, :stok, :kondisi)"
-);
+$nama = trim($_POST['nama_alat'] ?? '');
+$kategori = trim($_POST['kategori'] ?? '');
+$stokInput = trim((string)($_POST['stok'] ?? ''));
+$kondisi = trim($_POST['kondisi'] ?? '');
+$kategoriValid = ['Tenda', 'Perlengkapan Tidur', 'Memasak', 'Penerangan', 'Lainnya', 'Tas', 'Pendakian', 'Pakaian', 'Pelindung'];
+$kondisiValid = ['Baik', 'Perlu Dicek', 'Rusak'];
 
-$stmt->execute([
-    'nama_alat' => $namaAlat,
-    'kategori' => $kategori !== '' ? $kategori : null,
-    'stok' => (int) $stok,
-    'kondisi' => $kondisi
-]);
+if ($nama === '' || !in_array($kategori, $kategoriValid, true) ||
+    $stokInput === '' || filter_var($stokInput, FILTER_VALIDATE_INT) === false ||
+    (int)$stokInput < 0 || !in_array($kondisi, $kondisiValid, true)) {
+    $_SESSION['flash'] = ['type' => 'error', 'message' => 'Gagal menyimpan alat. Periksa semua isian dan pastikan stok bilangan bulat minimal 0.'];
+    header('Location: tambah.php');
+    exit;
+}
 
-$_SESSION['flash'] = [
-    'type' => 'success',
-    'pesan' => 'Data alat kemah berhasil ditambahkan.'
-];
+try {
+    $stmt = $pdo->prepare(
+        'INSERT INTO alat (nama_alat, kategori, stok, kondisi)
+         VALUES (:nama_alat, :kategori, :stok, :kondisi)
+         RETURNING id'
+    );
+    $stmt->execute([
+        ':nama_alat' => $nama,
+        ':kategori' => $kategori,
+        ':stok' => (int)$stokInput,
+        ':kondisi' => $kondisi,
+    ]);
+    $idBaru = $stmt->fetchColumn();
+    $_SESSION['flash'] = ['type' => 'success', 'message' => 'Data alat kemah berhasil ditambahkan (ID ' . $idBaru . ').'];
+} catch (PDOException $e) {
+    error_log('Gagal menambahkan alat: ' . $e->getMessage());
+    $_SESSION['flash'] = ['type' => 'error', 'message' => 'Data alat gagal disimpan ke database. Periksa koneksi dan struktur tabel.'];
+}
 
-header('Location: /alatkemah/list.php');
+header('Location: list.php');
 exit;

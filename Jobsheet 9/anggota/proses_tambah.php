@@ -1,59 +1,45 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
+require __DIR__ . '/../includes/init.php';
 require __DIR__ . '/../includes/koneksi.php';
 
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Location: tambah.php');
+    exit;
+}
+
 $nama = trim($_POST['nama'] ?? '');
-$noAnggota = trim($_POST['no_anggota'] ?? '');
+$identitas = trim($_POST['nomor_identitas'] ?? '');
+$telepon = trim($_POST['telepon'] ?? '');
 $alamat = trim($_POST['alamat'] ?? '');
-$noHp = trim($_POST['no_hp'] ?? '');
 
-if ($nama === '' || $noAnggota === '') {
-    $_SESSION['flash'] = [
-        'type' => 'error',
-        'pesan' => 'Nama dan nomor anggota wajib diisi.'
-    ];
-
-    header('Location: /anggota/tambah.php');
+if ($nama === '' || $identitas === '' || $telepon === '' || $alamat === '') {
+    $_SESSION['flash'] = ['type' => 'error', 'message' => 'Gagal menyimpan peminjam. Semua kolom wajib diisi.'];
+    header('Location: tambah.php');
     exit;
 }
 
 try {
     $stmt = $pdo->prepare(
-        "INSERT INTO anggota (nama, no_anggota, alamat, no_hp)
-         VALUES (:nama, :no_anggota, :alamat, :no_hp)"
+        'INSERT INTO anggota (nama, nomor_identitas, telepon, alamat)
+         VALUES (:nama, :nomor_identitas, :telepon, :alamat)
+         RETURNING id'
     );
-
     $stmt->execute([
-        'nama' => $nama,
-        'no_anggota' => $noAnggota,
-        'alamat' => $alamat !== '' ? $alamat : null,
-        'no_hp' => $noHp !== '' ? $noHp : null
+        ':nama' => $nama,
+        ':nomor_identitas' => $identitas,
+        ':telepon' => $telepon,
+        ':alamat' => $alamat,
     ]);
-
-    $_SESSION['flash'] = [
-        'type' => 'success',
-        'pesan' => 'Data peminjam berhasil ditambahkan.'
-    ];
-
-    header('Location: /anggota/list.php');
-    exit;
-
+    $idBaru = $stmt->fetchColumn();
+    $_SESSION['flash'] = ['type' => 'success', 'message' => 'Data peminjam berhasil ditambahkan (ID ' . $idBaru . ').'];
 } catch (PDOException $e) {
+    error_log('Gagal menambahkan anggota: ' . $e->getMessage());
     if ($e->getCode() === '23505') {
-        $_SESSION['flash'] = [
-            'type' => 'error',
-            'pesan' => 'Nomor anggota sudah terdaftar. Gunakan nomor lain.'
-        ];
+        $_SESSION['flash'] = ['type' => 'error', 'message' => 'Nomor identitas sudah digunakan.'];
     } else {
-        $_SESSION['flash'] = [
-            'type' => 'error',
-            'pesan' => 'Data peminjam gagal disimpan.'
-        ];
+        $_SESSION['flash'] = ['type' => 'error', 'message' => 'Data peminjam gagal disimpan ke database. Periksa koneksi dan struktur tabel.'];
     }
-
-    header('Location: /anggota/tambah.php');
-    exit;
 }
+
+header('Location: list.php');
+exit;

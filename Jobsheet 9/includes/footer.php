@@ -1,7 +1,5 @@
 <footer>
-    <p>&copy; <?= date('Y') ?> Sistem Peminjaman Alat Kemah</p>
+    <p>&copy; 2026 Camp Gear. Sistem Pengelolaan Alat Kemah.</p>
 </footer>
-
-<script src="/assets/js/app.js"></script>
 </body>
 </html>

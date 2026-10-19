@@ -1,249 +1,39 @@
 <?php
-session_start();
-
+require __DIR__ . '/../includes/init.php';
 require __DIR__ . '/../includes/koneksi.php';
-
-$page_title = "Data Alat Kemah";
-include __DIR__ . '/../includes/header.php';
-
-// ===============================
-// SEARCH
-// ===============================
-$q = trim($_GET['q'] ?? '');
-
-// ===============================
-// PAGINATION
-// ===============================
+$q = trim((string)($_GET['q'] ?? ''));
+$page = max(1, filter_var($_GET['page'] ?? 1, FILTER_VALIDATE_INT) ?: 1);
 $perPage = 5;
-
-$page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
-if ($page < 1) {
-    $page = 1;
-}
-
+$where = $q !== '' ? ' WHERE (nama_alat ILIKE :kw OR kategori ILIKE :kw OR kondisi ILIKE :kw)' : '';
+$countStmt = $pdo->prepare('SELECT COUNT(*) FROM alat' . $where);
+if ($q !== '') $countStmt->execute([':kw' => '%' . $q . '%']); else $countStmt->execute();
+$total = (int)$countStmt->fetchColumn();
+$totalPages = max(1, (int)ceil($total / $perPage));
+$page = min($page, $totalPages);
 $offset = ($page - 1) * $perPage;
-
-// ===============================
-// HITUNG TOTAL DATA
-// ===============================
-if ($q !== '') {
-    $stmtCount = $pdo->prepare(
-        "SELECT COUNT(*)
-         FROM alat
-         WHERE nama_alat ILIKE :q
-            OR kategori ILIKE :q
-            OR kondisi ILIKE :q"
-    );
-
-    $stmtCount->execute([
-        'q' => '%' . $q . '%'
-    ]);
-} else {
-    $stmtCount = $pdo->query("SELECT COUNT(*) FROM alat");
-}
-
-$totalData = (int) $stmtCount->fetchColumn();
-
-$totalPages = max(1, (int) ceil($totalData / $perPage));
-
-if ($page > $totalPages) {
-    $page = $totalPages;
-    $offset = ($page - 1) * $perPage;
-}
-
-// ===============================
-// AMBIL DATA
-// ===============================
-if ($q !== '') {
-    $stmt = $pdo->prepare(
-        "SELECT *
-         FROM alat
-         WHERE nama_alat ILIKE :q
-            OR kategori ILIKE :q
-            OR kondisi ILIKE :q
-         ORDER BY id DESC
-         LIMIT :limit OFFSET :offset"
-    );
-
-    $stmt->bindValue(':q', '%' . $q . '%');
-    $stmt->bindValue(':limit', $perPage, PDO::PARAM_INT);
-    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
-    $stmt->execute();
-
-} else {
-    $stmt = $pdo->prepare(
-        "SELECT *
-         FROM alat
-         ORDER BY id DESC
-         LIMIT :limit OFFSET :offset"
-    );
-
-    $stmt->bindValue(':limit', $perPage, PDO::PARAM_INT);
-    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
-    $stmt->execute();
-}
-
-$daftarAlat = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-$flash = $_SESSION['flash'] ?? null;
-unset($_SESSION['flash']);
+$sql = 'SELECT * FROM alat' . $where . ' ORDER BY id DESC LIMIT :lim OFFSET :off';
+$stmt = $pdo->prepare($sql);
+if ($q !== '') $stmt->bindValue(':kw', '%' . $q . '%', PDO::PARAM_STR);
+$stmt->bindValue(':lim', $perPage, PDO::PARAM_INT);
+$stmt->bindValue(':off', $offset, PDO::PARAM_INT);
+$stmt->execute();
+$items = $stmt->fetchAll();
+$page_title = 'Data Alat Kemah - Camp Gear';
+$active_page = 'alat';
+require __DIR__ . '/../includes/header.php';
 ?>
-
 <main>
-    <section>
-
-        <h2>Data Alat Kemah</h2>
-
-        <?php if ($flash): ?>
-            <p class="flash flash-<?= htmlspecialchars($flash['type']) ?>">
-                <?= htmlspecialchars($flash['pesan']) ?>
-            </p>
-        <?php endif; ?>
-
-        <!-- SEARCH -->
-        <form method="get">
-            <input
-                type="search"
-                name="q"
-                placeholder="Cari alat kemah..."
-                value="<?= htmlspecialchars($q) ?>"
-            >
-
-            <button type="submit">Cari</button>
-
-            <?php if ($q !== ''): ?>
-                <a href="/alatkemah/list.php">Reset</a>
-            <?php endif; ?>
-        </form>
-
-        <p>
-            <a href="/alatkemah/tambah.php">+ Tambah Alat</a>
-        </p>
-
-        <div class="table-responsive">
-            <table>
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama Alat</th>
-                        <th>Kategori</th>
-                        <th>Stok</th>
-                        <th>Kondisi</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-
-                <?php if (empty($daftarAlat)): ?>
-
-                    <tr>
-                        <td colspan="6">
-                            Data tidak ditemukan.
-                        </td>
-                    </tr>
-
-                <?php else: ?>
-
-                    <?php foreach ($daftarAlat as $i => $alat): ?>
-
-                        <tr>
-                            <td><?= $offset + $i + 1 ?></td>
-
-                            <td>
-                                <?= htmlspecialchars($alat['nama_alat']) ?>
-                            </td>
-
-                            <td>
-                                <?= htmlspecialchars($alat['kategori'] ?? '-') ?>
-                            </td>
-
-                            <td>
-                                <?= htmlspecialchars((string) $alat['stok']) ?>
-                            </td>
-
-                            <td>
-                                <?= htmlspecialchars($alat['kondisi']) ?>
-                            </td>
-
-                            <td>
-
-                                <a href="/alatkemah/edit.php?id=<?= $alat['id'] ?>">
-                                    Edit
-                                </a>
-
-                                <form
-                                    class="form-hapus"
-                                    method="post"
-                                    action="/alatkemah/hapus.php"
-                                    style="display:inline;"
-                                >
-                                    <input
-                                        type="hidden"
-                                        name="id"
-                                        value="<?= $alat['id'] ?>"
-                                    >
-
-                                    <button type="submit">
-                                        Hapus
-                                    </button>
-                                </form>
-
-                            </td>
-                        </tr>
-
-                    <?php endforeach; ?>
-
-                <?php endif; ?>
-
-                </tbody>
-            </table>
-        </div>
-
-        <!-- PAGINATION -->
-        <?php if ($totalPages > 1): ?>
-
-            <p>
-                Halaman <?= $page ?> dari <?= $totalPages ?>
-            </p>
-
-            <div>
-
-                <?php if ($page > 1): ?>
-                    <a href="?page=<?= $page - 1 ?>&q=<?= urlencode($q) ?>">
-                        ← Sebelumnya
-                    </a>
-                <?php endif; ?>
-
-                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-
-                    <?php if ($i == $page): ?>
-
-                        <strong>
-                            <?= $i ?>
-                        </strong>
-
-                    <?php else: ?>
-
-                        <a href="?page=<?= $i ?>&q=<?= urlencode($q) ?>">
-                            <?= $i ?>
-                        </a>
-
-                    <?php endif; ?>
-
-                <?php endfor; ?>
-
-                <?php if ($page < $totalPages): ?>
-                    <a href="?page=<?= $page + 1 ?>&q=<?= urlencode($q) ?>">
-                        Berikutnya →
-                    </a>
-                <?php endif; ?>
-
-            </div>
-
-        <?php endif; ?>
-
-    </section>
-</main>
-
-<?php include __DIR__ . '/../includes/footer.php'; ?>
+<section class="page-heading"><p class="eyebrow">MANAJEMEN PERLENGKAPAN</p><h1>Data Alat Kemah</h1><p>Kelola data melalui database PostgreSQL.</p></section>
+<section class="panel">
+<div class="panel-heading"><div><h2>Daftar Data Alat Kemah</h2><p>Pencarian server-side dan pagination, 5 data per halaman.</p></div><a href="tambah.php" class="btn btn-primary">+ Tambah Alat</a></div>
+<form method="get" action="list.php" class="search-form">
+<label for="search-input">Cari data</label>
+<div class="search-controls"><input type="search" id="search-input" name="q" value="<?= htmlspecialchars($q, ENT_QUOTES, 'UTF-8') ?>" placeholder="Ketik kata kunci..."><button class="btn btn-primary" type="submit">Cari</button><?php if ($q !== ''): ?><a class="btn btn-secondary" href="list.php">Reset</a><?php endif; ?></div>
+</form>
+<div class="table-responsive"><table><thead><tr><th>No.</th><th>Nama Alat</th><th>Kategori</th><th>Stok</th><th>Kondisi</th><th>Aksi</th></tr></thead><tbody>
+<?php if (!$items): ?><tr><td colspan="6">Data tidak ditemukan.</td></tr>
+<?php else: foreach ($items as $index => $item): ?><tr><td><?= $offset + $index + 1 ?></td><td><?= htmlspecialchars($item['nama_alat'], ENT_QUOTES, 'UTF-8') ?></td><td><?= htmlspecialchars($item['kategori'], ENT_QUOTES, 'UTF-8') ?></td><td><?= (int)$item['stok'] ?></td><td><?= htmlspecialchars($item['kondisi'], ENT_QUOTES, 'UTF-8') ?></td><td class="action-buttons"><a class="btn btn-secondary" href="edit.php?id=<?= (int)$item['id'] ?>">Edit</a><form class="form-hapus" method="post" action="hapus.php"><input type="hidden" name="id" value="<?= (int)$item['id'] ?>"><button type="submit" class="btn btn-danger">Hapus</button></form></td></tr><?php endforeach; endif; ?>
+</tbody></table></div>
+<div class="pagination"><span>Halaman <?= $page ?> dari <?= $totalPages ?> (<?= $total ?> data)</span><div><?php if ($page > 1): ?><a class="btn btn-secondary" href="?q=<?= rawurlencode($q) ?>&page=<?= $page-1 ?>">Sebelumnya</a><?php endif; ?><?php if ($page < $totalPages): ?><a class="btn btn-secondary" href="?q=<?= rawurlencode($q) ?>&page=<?= $page+1 ?>">Berikutnya</a><?php endif; ?></div></div>
+</section><div class="back-link"><a href="../index.php" class="text-link">&larr; Kembali ke Beranda</a></div></main>
+<?php require __DIR__ . '/../includes/footer.php'; ?>
