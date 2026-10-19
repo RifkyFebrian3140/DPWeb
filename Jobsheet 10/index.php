@@ -1,100 +1,59 @@
-<<<<<<< HEAD
 <?php
-session_start();
-
+$page_title = 'Camp Gear - Beranda';
+$active_page = 'home';
+require __DIR__ . '/includes/init.php';
 require __DIR__ . '/includes/koneksi.php';
-
-$page_title = "Beranda";
-
-$totalAlat = $pdo
-    ->query("SELECT COUNT(*) FROM alat")
-    ->fetchColumn();
-
-$totalPeminjam = $pdo
-    ->query("SELECT COUNT(*) FROM anggota")
-    ->fetchColumn();
-
-include __DIR__ . '/includes/header.php';
+$totalAlat = (int) $pdo->query('SELECT COUNT(*) FROM alat')->fetchColumn();
+$totalAnggota = (int) $pdo->query('SELECT COUNT(*) FROM anggota')->fetchColumn();
+require __DIR__ . '/includes/header.php';
 ?>
-
 <main>
-    <section>
-        <h2>Selamat Datang di Sistem Peminjaman Alat Kemah</h2>
-        <p>
-            Aplikasi sederhana untuk mengelola data alat kemah
-            dan data peminjam.
+    <section class="hero">
+        <p class="eyebrow">PERLENGKAPAN PETUALANGAN</p>
+        <h1>Explore More.<br><span>Worry Less.</span></h1>
+        <p class="hero-description">
+            Kelola perlengkapan kemah dengan mudah. Siapkan peralatan,
+            atur data peminjam, dan mulai petualanganmu.
         </p>
+        <div class="hero-actions">
+            <a href="alatkemah/list.php" class="btn btn-primary">Lihat Alat Kemah</a>
+            <a href="anggota/list.php" class="btn btn-secondary">Data Peminjam</a>
+        </div>
     </section>
-
-    <section>
-        <h2>Ringkasan Data</h2>
-
-        <article>
-            <h3>Total Alat Kemah</h3>
-            <p><?= htmlspecialchars((string) $totalAlat) ?></p>
-            <a href="/alatkemah/list.php">
-                Lihat Data Alat
-            </a>
-        </article>
-
-        <article>
-            <h3>Total Peminjam</h3>
-            <p><?= htmlspecialchars((string) $totalPeminjam) ?></p>
-            <a href="/anggota/list.php">
-                Lihat Data Peminjam
-            </a>
-        </article>
+    <section class="content-section">
+        <div class="section-heading">
+            <p class="eyebrow">MENU UTAMA</p>
+            <h2>Pengelolaan Camp Gear</h2>
+            <p>Pilih menu untuk melihat dan mengelola data.</p>
+        </div>
+        <div class="stats-grid">
+            <article class="stat-card">
+                <span class="stat-icon">01</span>
+                <h3>Data Alat Kemah</h3>
+                <p>Total <?= $totalAlat ?> jenis alat terdaftar.</p>
+                <a href="alatkemah/list.php" class="text-link">Buka data &rarr;</a>
+            </article>
+            <article class="stat-card">
+                <span class="stat-icon">02</span>
+                <h3>Data Peminjam</h3>
+                <p>Total <?= $totalAnggota ?> anggota terdaftar.</p>
+                <a href="anggota/list.php" class="text-link">Buka data &rarr;</a>
+            </article>
+            <article class="stat-card">
+                <span class="stat-icon">03</span>
+                <h3>Persiapan Kemah</h3>
+                <p>Pastikan perlengkapan tersedia sebelum digunakan.</p>
+                <a href="alatkemah/list.php" class="text-link">Cek perlengkapan &rarr;</a>
+            </article>
+        </div>
+    </section>
+    <section class="notice">
+        <div>
+            <p class="eyebrow">CAMP GEAR</p>
+            <h2>Petualangan dimulai dari persiapan.</h2>
+            <p>Kelola perlengkapanmu agar perjalanan lebih terencana.</p>
+        </div>
+        <a href="alatkemah/tambah.php" class="btn btn-primary">+ Tambah Alat</a>
     </section>
 </main>
-
-=======
-<?php
-session_start();
-
-require __DIR__ . '/includes/koneksi.php';
-
-$page_title = "Beranda";
-
-$totalAlat = $pdo
-    ->query("SELECT COUNT(*) FROM alat")
-    ->fetchColumn();
-
-$totalPeminjam = $pdo
-    ->query("SELECT COUNT(*) FROM anggota")
-    ->fetchColumn();
-
-include __DIR__ . '/includes/header.php';
-?>
-
-<main>
-    <section>
-        <h2>Selamat Datang di Sistem Peminjaman Alat Kemah</h2>
-        <p>
-            Aplikasi sederhana untuk mengelola data alat kemah
-            dan data peminjam.
-        </p>
-    </section>
-
-    <section>
-        <h2>Ringkasan Data</h2>
-
-        <article>
-            <h3>Total Alat Kemah</h3>
-            <p><?= htmlspecialchars((string) $totalAlat) ?></p>
-            <a href="/alatkemah/list.php">
-                Lihat Data Alat
-            </a>
-        </article>
-
-        <article>
-            <h3>Total Peminjam</h3>
-            <p><?= htmlspecialchars((string) $totalPeminjam) ?></p>
-            <a href="/anggota/list.php">
-                Lihat Data Peminjam
-            </a>
-        </article>
-    </section>
-</main>
-
->>>>>>> 0762f6413fa933af1a320472983cb60aa6751ab8
-<?php include __DIR__ . '/includes/footer.php'; ?>
+<?php require __DIR__ . '/includes/footer.php'; ?>

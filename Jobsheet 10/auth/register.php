@@ -1,106 +1,21 @@
-<<<<<<< HEAD
 <?php
-
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+if (session_status() === PHP_SESSION_NONE) session_start();
+if (!empty($_SESSION['user_id'])) {
+    header('Location: /index.php'); exit;
 }
-
-require_once '../includes/header.php';
+$page_title = 'Register Petugas - Camp Gear';
+require __DIR__ . '/../includes/header.php';
 ?>
-
-<div class="container">
-    <h2>Register Petugas</h2>
-
-    <form action="proses_register.php" method="POST">
-
-        <div>
-            <label for="nama">Nama</label>
-            <input type="text" id="nama" name="nama" required>
-        </div>
-
-        <br>
-
-        <div>
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" required>
-        </div>
-
-        <br>
-
-        <div>
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-
-        <br>
-
-        <div>
-            <label for="konfirmasi_password">Konfirmasi Password</label>
-            <input type="password" id="konfirmasi_password" name="konfirmasi_password" required>
-        </div>
-
-        <br>
-
-        <button type="submit">Daftar</button>
-    </form>
-
-    <p>
-        Sudah punya akun?
-        <a href="login.php">Login di sini</a>
-    </p>
-</div>
-
-=======
-<?php
-
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-require_once '../includes/header.php';
-?>
-
-<div class="container">
-    <h2>Register Petugas</h2>
-
-    <form action="proses_register.php" method="POST">
-
-        <div>
-            <label for="nama">Nama</label>
-            <input type="text" id="nama" name="nama" required>
-        </div>
-
-        <br>
-
-        <div>
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" required>
-        </div>
-
-        <br>
-
-        <div>
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-
-        <br>
-
-        <div>
-            <label for="konfirmasi_password">Konfirmasi Password</label>
-            <input type="password" id="konfirmasi_password" name="konfirmasi_password" required>
-        </div>
-
-        <br>
-
-        <button type="submit">Daftar</button>
-    </form>
-
-    <p>
-        Sudah punya akun?
-        <a href="login.php">Login di sini</a>
-    </p>
-</div>
-
->>>>>>> 0762f6413fa933af1a320472983cb60aa6751ab8
-<?php require_once '../includes/footer.php'; ?>
+<main>
+<section class="page-heading"><p class="eyebrow">AKUN PETUGAS</p><h1>Register</h1><p>Buat akun petugas Camp Gear.</p></section>
+<section class="panel form-panel">
+<form class="data-form" method="post" action="/auth/proses_register.php">
+<div class="form-group"><label for="nama">Nama</label><input id="nama" name="nama" required maxlength="150" autocomplete="name"></div>
+<div class="form-group"><label for="username">Username</label><input id="username" name="username" required maxlength="80" autocomplete="username"></div>
+<div class="form-group"><label for="password">Password</label><input type="password" id="password" name="password" required minlength="8" autocomplete="new-password"></div>
+<div class="form-group"><label for="konfirmasi_password">Konfirmasi Password</label><input type="password" id="konfirmasi_password" name="konfirmasi_password" required minlength="8" autocomplete="new-password"></div>
+<div class="form-actions"><button class="btn btn-primary" type="submit">Daftar</button><a class="btn btn-secondary" href="/auth/login.php">Sudah punya akun?</a></div>
+</form>
+</section>
+</main>
+<?php require __DIR__ . '/../includes/footer.php'; ?>

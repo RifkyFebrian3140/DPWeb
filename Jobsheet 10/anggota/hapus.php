@@ -1,80 +1,12 @@
-<<<<<<< HEAD
 <?php
-
-require __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../includes/auth.php';
+require __DIR__ . '/../includes/init.php';
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') { http_response_code(405); header('Allow: POST'); exit('Method Not Allowed'); }
 require __DIR__ . '/../includes/koneksi.php';
-
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-
-    header('Location: /anggota/list.php');
-    exit;
-}
-
-$id = (int) ($_POST['id'] ?? 0);
-
-if ($id <= 0) {
-
-    $_SESSION['flash'] = [
-        'type' => 'error',
-        'pesan' => 'ID peminjam tidak valid.'
-    ];
-
-    header('Location: /anggota/list.php');
-    exit;
-}
-
-$stmt = $pdo->prepare(
-    "DELETE FROM anggota WHERE id = :id"
-);
-
-$stmt->execute([
-    'id' => $id
-]);
-
-$_SESSION['flash'] = [
-    'type' => 'success',
-    'pesan' => 'Data peminjam berhasil dihapus.'
-];
-
-header('Location: /anggota/list.php');
-=======
-<?php
-
-require __DIR__ . '/../includes/auth.php';
-require __DIR__ . '/../includes/koneksi.php';
-
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-
-    header('Location: /anggota/list.php');
-    exit;
-}
-
-$id = (int) ($_POST['id'] ?? 0);
-
-if ($id <= 0) {
-
-    $_SESSION['flash'] = [
-        'type' => 'error',
-        'pesan' => 'ID peminjam tidak valid.'
-    ];
-
-    header('Location: /anggota/list.php');
-    exit;
-}
-
-$stmt = $pdo->prepare(
-    "DELETE FROM anggota WHERE id = :id"
-);
-
-$stmt->execute([
-    'id' => $id
-]);
-
-$_SESSION['flash'] = [
-    'type' => 'success',
-    'pesan' => 'Data peminjam berhasil dihapus.'
-];
-
-header('Location: /anggota/list.php');
->>>>>>> 0762f6413fa933af1a320472983cb60aa6751ab8
+$id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+if (!$id || $id < 1) { $_SESSION['flash']=['type'=>'error','message'=>'ID tidak valid.']; header('Location: list.php'); exit; }
+$stmt = $pdo->prepare('DELETE FROM anggota WHERE id = :id');
+$stmt->execute([':id'=>$id]);
+$_SESSION['flash'] = ['type'=>'success','message'=>$stmt->rowCount() ? 'Data berhasil dihapus.' : 'Data tidak ditemukan.'];
+header('Location: list.php');
 exit;

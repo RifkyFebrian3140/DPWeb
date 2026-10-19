@@ -1,140 +1,40 @@
-<<<<<<< HEAD
 <?php
-
-require __DIR__ . '/../includes/auth.php';
-
-$page_title = "Tambah Peminjam";
-include __DIR__ . '/../includes/header.php';
-
-$flash = $_SESSION['flash'] ?? null;
-unset($_SESSION['flash']);
+require_once __DIR__ . '/../includes/auth.php';
+$page_title = 'Tambah Peminjam - Camp Gear';
+$active_page = 'anggota';
+require __DIR__ . '/../includes/header.php';
 ?>
-
 <main>
-    <section>
-        <h2>Tambah Peminjam</h2>
-
-        <?php if ($flash): ?>
-            <p class="flash flash-<?= htmlspecialchars($flash['type']) ?>">
-                <?= htmlspecialchars($flash['pesan']) ?>
-            </p>
-        <?php endif; ?>
-
-        <form method="post" action="/anggota/proses_tambah.php">
-            <p>
-                <label for="nama">Nama Peminjam</label><br>
-                <input
-                    type="text"
-                    id="nama"
-                    name="nama"
-                    required
-                >
-            </p>
-
-            <p>
-                <label for="no_anggota">Nomor Anggota</label><br>
-                <input
-                    type="text"
-                    id="no_anggota"
-                    name="no_anggota"
-                    required
-                >
-            </p>
-
-            <p>
-                <label for="alamat">Alamat</label><br>
-                <textarea
-                    id="alamat"
-                    name="alamat"
-                    rows="3"
-                ></textarea>
-            </p>
-
-            <p>
-                <label for="no_hp">Nomor HP</label><br>
-                <input
-                    type="text"
-                    id="no_hp"
-                    name="no_hp"
-                >
-            </p>
-
-            <p>
-                <button type="submit">Simpan Peminjam</button>
-                <a href="/anggota/list.php">Kembali</a>
-            </p>
+    <section class="page-heading">
+        <p class="eyebrow">MANAJEMEN ANGGOTA</p>
+        <h1>Tambah Peminjam</h1>
+        <p>Lengkapi informasi anggota berikut.</p>
+    </section>
+    <section class="panel form-panel">
+        <h2>Informasi Peminjam</h2>
+        <form class="data-form" method="post" action="proses_tambah.php">
+            <div class="form-group">
+                <label for="nama">Nama Lengkap</label>
+                <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap" required>
+            </div>
+            <div class="form-group">
+                <label for="nomor_identitas">Nomor Identitas</label>
+                <input type="text" id="nomor_identitas" name="nomor_identitas" placeholder="Contoh: AG005" required>
+            </div>
+            <div class="form-group">
+                <label for="telepon">Nomor Telepon</label>
+                <input type="tel" id="telepon" name="telepon" placeholder="Masukkan nomor telepon" required>
+            </div>
+            <div class="form-group">
+                <label for="alamat">Alamat</label>
+                <textarea id="alamat" name="alamat" rows="4" placeholder="Masukkan alamat" required></textarea>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Simpan Data</button>
+                <a href="list.php" class="btn btn-secondary">Batal</a>
+            </div>
         </form>
+        <p class="helper-text">Data disimpan ke database PostgreSQL.</p>
     </section>
 </main>
-
-=======
-<?php
-
-require __DIR__ . '/../includes/auth.php';
-
-$page_title = "Tambah Peminjam";
-include __DIR__ . '/../includes/header.php';
-
-$flash = $_SESSION['flash'] ?? null;
-unset($_SESSION['flash']);
-?>
-
-<main>
-    <section>
-        <h2>Tambah Peminjam</h2>
-
-        <?php if ($flash): ?>
-            <p class="flash flash-<?= htmlspecialchars($flash['type']) ?>">
-                <?= htmlspecialchars($flash['pesan']) ?>
-            </p>
-        <?php endif; ?>
-
-        <form method="post" action="/anggota/proses_tambah.php">
-            <p>
-                <label for="nama">Nama Peminjam</label><br>
-                <input
-                    type="text"
-                    id="nama"
-                    name="nama"
-                    required
-                >
-            </p>
-
-            <p>
-                <label for="no_anggota">Nomor Anggota</label><br>
-                <input
-                    type="text"
-                    id="no_anggota"
-                    name="no_anggota"
-                    required
-                >
-            </p>
-
-            <p>
-                <label for="alamat">Alamat</label><br>
-                <textarea
-                    id="alamat"
-                    name="alamat"
-                    rows="3"
-                ></textarea>
-            </p>
-
-            <p>
-                <label for="no_hp">Nomor HP</label><br>
-                <input
-                    type="text"
-                    id="no_hp"
-                    name="no_hp"
-                >
-            </p>
-
-            <p>
-                <button type="submit">Simpan Peminjam</button>
-                <a href="/anggota/list.php">Kembali</a>
-            </p>
-        </form>
-    </section>
-</main>
-
->>>>>>> 0762f6413fa933af1a320472983cb60aa6751ab8
-<?php include __DIR__ . '/../includes/footer.php'; ?>
+<?php require __DIR__ . '/../includes/footer.php'; ?>

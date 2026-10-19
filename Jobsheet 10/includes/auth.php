@@ -1,22 +1,11 @@
-<<<<<<< HEAD
 <?php
-
+// Guard akses: wajib dipanggil sebelum output HTML.
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-if (!isset($_SESSION['user_id'])) {
-    header('Location: /auth/login.php');
+if (empty($_SESSION['user_id'])) {
+    $loginUrl = '/auth/login.php';
+    header('Location: ' . $loginUrl, true, 302);
     exit;
-=======
-<?php
-
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-if (!isset($_SESSION['user_id'])) {
-    header('Location: /auth/login.php');
-    exit;
->>>>>>> 0762f6413fa933af1a320472983cb60aa6751ab8
 }

@@ -1,78 +1,83 @@
-<<<<<<< HEAD
 <?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-if (!isset($page_title)) {
-    $page_title = "Sistem Peminjaman Alat Kemah";
-}
+$page_title = $page_title ?? 'Camp Gear';
+$active_page = $active_page ?? '';
 ?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($page_title) ?></title>
+
+    <title><?= htmlspecialchars($page_title, ENT_QUOTES, 'UTF-8') ?></title>
+
     <link rel="stylesheet" href="/assets/css/style.css">
+    <script src="/assets/js/apps.js" defer></script>
 </head>
 <body>
-
 <header>
-    <h1>Sistem Peminjaman Alat Kemah</h1>
+    <a href="/index.php" class="logo">CAMP <span>GEAR</span></a>
+
+    <button
+        type="button"
+        class="nav-toggle-label"
+        aria-expanded="false"
+    >
+        ☰ Menu
+    </button>
 
     <nav>
-        <a href="/index.php">Beranda</a>
-        <a href="/alatkemah/list.php">Data Alat Kemah</a>
-        <a href="/anggota/list.php">Data Peminjam</a>
+        <ul>
+            <li>
+                <a
+                    href="/index.php"
+                    class="<?= $active_page === 'home' ? 'active' : '' ?>"
+                >
+                    Beranda
+                </a>
+            </li>
 
-        <?php if (isset($_SESSION['user_id'])): ?>
-            <span>
-                Petugas: <?= htmlspecialchars($_SESSION['nama']) ?>
-            </span>
+            <li>
+                <a
+                    href="/alatkemah/list.php"
+                    class="<?= $active_page === 'alat' ? 'active' : '' ?>"
+                >
+                    Data Alat Kemah
+                </a>
+            </li>
 
-            <a href="/auth/logout.php">Logout</a>
-        <?php else: ?>
-            <a href="/auth/login.php">Login</a>
-        <?php endif; ?>
+            <li>
+                <a
+                    href="/anggota/list.php"
+                    class="<?= $active_page === 'anggota' ? 'active' : '' ?>"
+                >
+                    Data Peminjam
+                </a>
+            </li>
+            <?php if (!empty($_SESSION['user_id'])): ?>
+                <li class="nav-user">
+                    <span>Petugas: <?= htmlspecialchars((string)($_SESSION['user_nama'] ?? $_SESSION['username'] ?? 'Pengguna'), ENT_QUOTES, 'UTF-8') ?></span>
+                </li>
+                <li><a href="/auth/logout.php">Logout</a></li>
+            <?php else: ?>
+                <li><a href="/auth/login.php">Login</a></li>
+                <li><a href="/auth/register.php">Register</a></li>
+            <?php endif; ?>
+        </ul>
     </nav>
-=======
-<?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-if (!isset($page_title)) {
-    $page_title = "Sistem Peminjaman Alat Kemah";
-}
-?>
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($page_title) ?></title>
-    <link rel="stylesheet" href="/assets/css/style.css">
-</head>
-<body>
-
-<header>
-    <h1>Sistem Peminjaman Alat Kemah</h1>
-
-    <nav>
-        <a href="/index.php">Beranda</a>
-        <a href="/alatkemah/list.php">Data Alat Kemah</a>
-        <a href="/anggota/list.php">Data Peminjam</a>
-
-        <?php if (isset($_SESSION['user_id'])): ?>
-            <span>
-                Petugas: <?= htmlspecialchars($_SESSION['nama']) ?>
-            </span>
-
-            <a href="/auth/logout.php">Logout</a>
-        <?php else: ?>
-            <a href="/auth/login.php">Login</a>
-        <?php endif; ?>
-    </nav>
->>>>>>> 0762f6413fa933af1a320472983cb60aa6751ab8
 </header>
+
+<?php if (!empty($_SESSION['flash'])): ?>
+    <div class="flash-message <?= htmlspecialchars($_SESSION['flash']['type'] ?? 'success', ENT_QUOTES, 'UTF-8') ?>" role="status">
+        <?= htmlspecialchars(
+            $_SESSION['flash']['message'],
+            ENT_QUOTES,
+            'UTF-8'
+        ) ?>
+    </div>
+
+    <?php unset($_SESSION['flash']); ?>
+<?php endif; ?>
